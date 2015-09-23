@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="seApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap-theme.css">
+
+    <script src="/node_modules/angular/angular.js"></script>
+    <script src="/node_modules/angular-route/angular-route.js"></script>
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/Directives/seMenu.js"></script>
+    <script src="js/Controllers/PagesControllers.js"></script>
+    <script src="js/Controllers/PageMainCtrl.js"></script>
+    <script src="js/Controllers/PageLoginCtrl.js"></script>
+    <script src="js/Controllers/PageUsersCtrl.js"></script>
+    <script src="js/Controllers/PageMyMaterialsCtrl.js"></script>
+    <script src="js/Services/UserService.js"></script>
+
+    <title>/edu</title>
+</head>
+<body>
+    <div se-menu></div>
+
+    <div class="container">
+        <div ng-view></div>
+    </div>
+</body>
+</html>
