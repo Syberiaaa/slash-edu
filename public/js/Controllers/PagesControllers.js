@@ -1,1 +1,1 @@
-var PagesControllers = angular.module('PagesControllers', []);
+var PagesControllers = angular.module('PagesControllers', ['ngSanitize']);

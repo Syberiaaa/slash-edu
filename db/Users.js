@@ -17,7 +17,7 @@ module.exports = function(mongoose) {
 
   Users.count({}, function(err, cnt) {
     if (cnt === 0) {
-      var admin = new Users({email: 'admin', password: '123456'});
+      var admin = new Users({email: 'admin@isu.ru', password: '123456'});
       admin.save(function(err) {
         if (err) console.error(err);
       });

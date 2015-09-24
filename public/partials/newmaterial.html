@@ -1,0 +1,8 @@
+<input ng-model="name" placeholder="Name of Material"><br>
+<select ng-model="type" >
+    <option value="text">Text Material</option>
+</select><br>
+<textarea cols="80" rows="15" ng-model="src" ></textarea><br>
+<button ng-click="add()">Add</button>
+<button ng-click="preview()">Preview</button><br>
+<div ng-bind-html="html"></div>

@@ -11,4 +11,6 @@ router.get('/user', function(req, res) {
   res.send(req.user);
 });
 
+router.use('/materials', require('./materials.js'));
+
 module.exports = router;

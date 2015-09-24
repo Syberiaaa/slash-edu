@@ -17,6 +17,10 @@ slashEduApp.config(['$routeProvider',
         templateUrl: 'partials/mymaterials.html',
         controller: 'MyMaterialsCtrl'
       }).
+      when('/newmaterial', {
+        templateUrl: 'partials/newmaterial.html',
+        controller: 'NewMaterialCtrl'
+      }).
       otherwise({
         redirectTo: '/'
       });
