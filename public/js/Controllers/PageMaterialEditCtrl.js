@@ -1,9 +1,11 @@
-PagesControllers.controller('NewMaterialCtrl', ['$scope', '$http', '$location',
-  function($scope, $http, $location) {
+PagesControllers.controller('MaterialEditCtrl', ['$scope', '$http', '$location', '$routeParams',
+  function($scope, $http, $location, $routeParams) {
     $scope.name = '';
     $scope.type = 'text';
     $scope.src = '';
     $scope.html = '';
+
+    $scope.materialId = $routeParams.materialId;
 
     $scope.preview = function() {
       $http.post('/api/materials/preview', {src: $scope.src})

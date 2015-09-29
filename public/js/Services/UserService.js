@@ -3,7 +3,6 @@ slashEduApp.service('UserService', ['$http', function($http) {
   $http.get('/api/user').
     then(function(response) {
       user = response.data;
-      console.log(user);
     }
   );
 

@@ -25,4 +25,29 @@ router.put('/', function(req, res) {
   });
 });
 
+router.get('/', function(req,res) {
+  // TODO issue #8
+
+  res.send('not implemented yet');
+});
+
+router.get('/:materialId', function(req, res) {
+  // TODO issue #9
+
+  res.send('not implemented yet');
+});
+
+router.post('/:materialId', function(req, res) {
+  // TODO issue #9
+
+  res.send('not implemented yet');
+});
+
+router.delete('/:materialId', function(req, res) {
+  // TODO issue #9
+
+  res.send('not implemented yet');
+});
+
+
 module.exports = router;
