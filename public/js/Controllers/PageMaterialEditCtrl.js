@@ -20,7 +20,7 @@ PagesControllers.controller('MaterialEditCtrl', ['$scope', '$http', '$location',
         type: $scope.type,
         src: $scope.src
       }).then(function(response) {
-        $location.path('/mymaterials');
+        $location.path('/materials');
       });
     }
   }
