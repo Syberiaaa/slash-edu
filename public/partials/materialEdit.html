@@ -1,9 +1,26 @@
-<p>you are on page for {{materialId}} material</p>
-<input ng-model="name" placeholder="Name of Material"><br>
-<select ng-model="type" >
-    <option value="text">Text Material</option>
-</select><br>
-<textarea cols="80" rows="15" ng-model="src" ></textarea><br>
-<button ng-click="add()">Add</button>
-<button ng-click="preview()">Preview</button><br>
-<div ng-bind-html="html"></div>
+
+<form role="form"><br>
+    <div class="form-group">
+        <input ng-model="name" type="text" class="form-control" placeholder="Название нового материала">
+    </div>
+    <div class="form-group">
+        <select ng-model="type" class="form-control input-sm">
+            <option value="text">Текст материала</option>
+        </select>
+    </div>
+    <div class="bs-example bs-example-tabs">
+        <ul id="myTab" class="nav nav-tabs">
+            <li class="active"><a href="#home" data-toggle="tab">Редактирование</a></li>
+            <li><a href="#profile" data-toggle="tab" ng-click="preview()">Предварительный просмотр</a></li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade in active" id="home">
+                <textarea ng-model="src" id ="inputScreen" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="tab-pane fade" id="profile">
+                <div ng-bind-html="html"></div>
+            </div>
+        </div>
+    </div><!-- /example -->
+        <button ng-click="add()" type="button" class="btn btn-primary btn-lg active">Добавить</button>
+</form>

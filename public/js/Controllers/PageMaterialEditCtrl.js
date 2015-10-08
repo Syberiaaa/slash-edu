@@ -23,5 +23,9 @@ PagesControllers.controller('MaterialEditCtrl', ['$scope', '$http', '$location',
         $location.path('/materials');
       });
     }
+      $('#myTab a').click(function (e) {
+          e.preventDefault()
+          $(this).tab('show')
+      })
   }
 ]);
