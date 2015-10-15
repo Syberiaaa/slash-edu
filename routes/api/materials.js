@@ -20,6 +20,7 @@ router.put('/', function(req, res) {
   });
 
   newMat.save(function(err) {
+
     if (err) res.sendStatus(400);
     else res.sendStatus(200);
   });

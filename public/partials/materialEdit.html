@@ -15,7 +15,12 @@
         </ul>
         <div id="myTabContent" class="tab-content">
             <div class="tab-pane fade in active" id="home">
-                <textarea ng-model="src" id ="inputScreen" class="form-control" rows="3"></textarea>
+                <div id="editor" ng-model="src"></div>
+                <style type="text/css">
+                    #editor {
+                        height: 150px;
+                    }
+                </style>
             </div>
             <div class="tab-pane fade" id="profile">
                 <div ng-bind-html="html"></div>
@@ -24,3 +29,4 @@
     </div><!-- /example -->
         <button ng-click="add()" type="button" class="btn btn-primary btn-lg active">Добавить</button>
 </form>
+

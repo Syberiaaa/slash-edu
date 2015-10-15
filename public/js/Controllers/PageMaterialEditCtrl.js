@@ -7,7 +7,9 @@ PagesControllers.controller('MaterialEditCtrl', ['$scope', '$http', '$location',
 
     $scope.materialId = $routeParams.materialId;
 
+
     $scope.preview = function() {
+        $scope.src = $scope.editor.getValue();
       $http.post('/api/materials/preview', {src: $scope.src})
         .then(function(response) {
           $scope.html = response.data;
@@ -27,5 +29,7 @@ PagesControllers.controller('MaterialEditCtrl', ['$scope', '$http', '$location',
           e.preventDefault()
           $(this).tab('show')
       })
+      $scope.editor = ace.edit("editor");
+
   }
 ]);
