@@ -2,7 +2,9 @@ var passwordHash = require('password-hash');
 
 module.exports = function(mongoose) {
   var usersSchema = mongoose.Schema({
+    name: String,
     email: String,
+    role: String,
     password: String
   });
 
@@ -15,12 +17,12 @@ module.exports = function(mongoose) {
 
   var Users = mongoose.model('Users', usersSchema);
 
-  Users.count({}, function(err, cnt) {
-    if (cnt === 0) {
-      var admin = new Users({email: 'admin@isu.ru', password: '123456'});
+  //Users.count({}, function(err, cnt) {
+  //  if (cnt === 5) {
+      var admin = new Users({name: 'Petr', email: 'pety@gmail.com', role: 'user', password: '123456'});
       admin.save(function(err) {
         if (err) console.error(err);
       });
-    }
-  });
+  //  }
+  //});
 };
