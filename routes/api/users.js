@@ -4,7 +4,7 @@ var db = require('../../db');
 var Users = db.model('Users');
 
 router.put('/', function(req, res) {
-    // TODO issue #1
+    console.log(req);
     res.send('not implemented yet');
 });
 
