@@ -1,5 +1,5 @@
-PagesControllers.controller('MaterialEditCtrl', ['$scope', '$http', '$location', '$routeParams', '$sce', '$parse',
-    function($scope, $http, $location, $routeParams, $sce, $parse) {
+PagesControllers.controller('MaterialEditCtrl', ['$scope', '$http', '$location', '$routeParams',
+    function ($scope, $http, $location, $routeParams) {
         $scope.name = '';
         $scope.type = 'text';
         $scope.src = '';
@@ -7,26 +7,33 @@ PagesControllers.controller('MaterialEditCtrl', ['$scope', '$http', '$location',
 
         $scope.materialId = $routeParams.materialId;
 
-       $scope.preview = function() {
+
+        $scope.preview = function () {
+            $scope.src = $scope.editor.getValue();
             $http.post('/api/materials/preview', {src: $scope.src})
-                .then(function(response) {
-                    $scope.html = $sce.trustAsHtml(response.data);
-                    MathJax.Hub.Reprocess(function() {
-                        console.log(arguments);
-                    });
-
-
+                .then(function (response) {
+                  $scope.html = $sce.trustAsHtml(response.data);
                 });
         };
 
-        $scope.add = function() {
+        $scope.add = function () {
+            $scope.src = $scope.editor.getValue();
             $http.put('/api/materials', {
                 name: $scope.name,
                 type: $scope.type,
                 src: $scope.src
-            }).then(function(response) {
+            }).then(function (response) {
                 $location.path('/materials');
             });
         }
+        $('#myTab a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        })
+        $scope.editor = ace.edit("editor");
+        $scope.editor.getSession().setMode("ace/mode/markdown");
+
+
     }
+  }
 ]);
