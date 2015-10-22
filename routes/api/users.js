@@ -19,8 +19,13 @@ router.put('/', function(req, res) {
 });
 
 router.get('/', function(req, res) {
-    // TODO issue #2
-    res.send('not implemented yet');
+    var v = Users.find({}, function (err, us) {
+        if( err) {
+            console.log("Exception");
+        } else {
+            res.send(us);
+        }
+    });
 });
 
 router.get('/:email', function(req, res) {

@@ -10,6 +10,25 @@
         <div class="col-md-4">rol</div>
     </div>-->
 
+
+<p>or edit <a href="#/users/admin@isu.ru">existing</a></p>
+<table border="1">
+    <tr>
+        <td>Id</td>
+        <td>Name</td>
+        <td>Email</td>
+        <td>Role</td>
+
+    </tr>
+    <tr ng-repeat="user in users">
+        <td>{{user._id}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.role}}</td>
+        <td><button type="submit" ng-click="user()">Edit</button></td>
+    </tr>
+</table>
+
 <div class="row">
     <div class="col-xs-12 col-sm-6 col-md-5">NameUsers
         <input type="text" class="form-control">
@@ -19,3 +38,4 @@
         <button class="btn btn-default" type="button">Go!</button>
     </div>
 </div>
+
