@@ -12,7 +12,7 @@ PagesControllers.controller('MaterialEditCtrl', ['$scope', '$http', '$location',
             $scope.src = $scope.editor.getValue();
             $http.post('/api/materials/preview', {src: $scope.src})
                 .then(function (response) {
-                    $scope.html = response.data;
+                  $scope.html = $sce.trustAsHtml(response.data);
                 });
         };
 
@@ -35,4 +35,5 @@ PagesControllers.controller('MaterialEditCtrl', ['$scope', '$http', '$location',
 
 
     }
+  }
 ]);
