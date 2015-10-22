@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 var passwordHash = require('password-hash');
 
 module.exports = function(mongoose) {
@@ -65,4 +65,4 @@ module.exports = function(mongoose) {
     }
   });
 
-};
+}};
