@@ -1,5 +1,5 @@
-PagesControllers.controller('MaterialEditCtrl', ['$scope', '$http', '$location', '$routeParams',
-    function ($scope, $http, $location, $routeParams) {
+PagesControllers.controller('MaterialEditCtrl', ['$scope', '$http', '$location', '$routeParams', '$sce',
+    function ($scope, $http, $location, $routeParams, $sce) {
         $scope.name = '';
         $scope.type = 'text';
         $scope.src = '';
@@ -12,7 +12,15 @@ PagesControllers.controller('MaterialEditCtrl', ['$scope', '$http', '$location',
             $scope.src = $scope.editor.getValue();
             $http.post('/api/materials/preview', {src: $scope.src})
                 .then(function (response) {
-                  $scope.html = $sce.trustAsHtml(response.data);
+                    $scope.html = $sce.trustAsHtml(response.data);
+
+                    setTimeout(function() {
+                        for(var i = 0; i < document.scripts.length; i++) {
+                            if (document.scripts[i].type.indexOf('math/tex') >= 0) {
+                                MathJax.Hub.Queue(['Typeset', MathJax.Hub, document.scripts[i]]);
+                            }
+                        }
+                    }, 500);
                 });
         };
 
@@ -35,5 +43,4 @@ PagesControllers.controller('MaterialEditCtrl', ['$scope', '$http', '$location',
 
 
     }
-  }
 ]);
