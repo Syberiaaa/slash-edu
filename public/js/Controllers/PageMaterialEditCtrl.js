@@ -1,35 +1,38 @@
 PagesControllers.controller('MaterialEditCtrl', ['$scope', '$http', '$location', '$routeParams',
-  function($scope, $http, $location, $routeParams) {
-    $scope.name = '';
-    $scope.type = 'text';
-    $scope.src = '';
-    $scope.html = '';
+    function ($scope, $http, $location, $routeParams) {
+        $scope.name = '';
+        $scope.type = 'text';
+        $scope.src = '';
+        $scope.html = '';
 
-    $scope.materialId = $routeParams.materialId;
+        $scope.materialId = $routeParams.materialId;
 
 
-    $scope.preview = function() {
-        $scope.src = $scope.editor.getValue();
-      $http.post('/api/materials/preview', {src: $scope.src})
-        .then(function(response) {
-          $scope.html = response.data;
-        });
-    };
+        $scope.preview = function () {
+            $scope.src = $scope.editor.getValue();
+            $http.post('/api/materials/preview', {src: $scope.src})
+                .then(function (response) {
+                    $scope.html = response.data;
+                });
+        };
 
-    $scope.add = function() {
-      $http.put('/api/materials', {
-        name: $scope.name,
-        type: $scope.type,
-        src: $scope.src
-      }).then(function(response) {
-        $location.path('/materials');
-      });
+        $scope.add = function () {
+            $scope.src = $scope.editor.getValue();
+            $http.put('/api/materials', {
+                name: $scope.name,
+                type: $scope.type,
+                src: $scope.src
+            }).then(function (response) {
+                $location.path('/materials');
+            });
+        }
+        $('#myTab a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        })
+        $scope.editor = ace.edit("editor");
+        $scope.editor.getSession().setMode("ace/mode/markdown");
+
+
     }
-      $('#myTab a').click(function (e) {
-          e.preventDefault()
-          $(this).tab('show')
-      })
-      $scope.editor = ace.edit("editor");
-
-  }
 ]);
