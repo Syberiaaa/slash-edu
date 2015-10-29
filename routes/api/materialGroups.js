@@ -4,13 +4,21 @@ var db = require('../../db');
 var MaterialGroups = db.model('MaterialGroups');
 
 router.put('/', function(req, res) {
-    // TODO issue #10
-    res.send('not implemented yet');
+    var newMatGrps = new MaterialGroups({
+        name:   req.body.name,
+        parent: req.body.parent,
+        owner:  req.user._id
+    });
+    newMatGrps.save(function(err) {
+        if (err) res.sendStatus(400);
+        else res.sendStatus(200);
+    });
 });
 
 router.get('/', function(req, res) {
-    // TODO issue #10
-    res.send('not implemented yet');
+    MaterialGroups.find(function(err, materialGroups){
+        res.send(materialGroups);
+    });
 });
 
 router.get('/:groupId', function(req, res) {
