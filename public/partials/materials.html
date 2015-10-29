@@ -1,39 +1,26 @@
-<div class="jumbotron">
-    <a href="#/materials/new" class="btn btn-primary btn-lg" role="button">New Material</a>
-
-    <p>this is a page with my materials list</p>
-
-    <p>there should be a list of all materials of current user. you can go across all materials.</p>
-
-    <p>here is am example of url: <a href="#/materials/asdf">Asdf Material</a>, <a href="#/materials/123">123 Material</a></p>
-
-</div>
-
-
-<div class="table-responsive">
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>name</th>
-            <th>type</th>
-            <th>edit<th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="material in materials | limitTo:itemsPerPage:numberMaterial">
-            <td>{{$index + 1 + (currentPage * 3)}}</td>
-            <td>{{material.name}}</td>
-            <td>{{material.type}}</td>
-            <td><a type="button" class="btn btn-xs btn-default" role="button" ng-href="#/materials/{{material._id}}">edit</a></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+<h2>Materials</h2>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="material in materials | limitTo:itemsPerPage:numberMaterial">
+        <td>{{$index + 1 + (currentPage * 3)}}</td>
+        <td>{{material.name}}</td>
+        <td>{{material.type}}</td>
+        <td><a type="button" class="btn btn-xs btn-default" role="button" ng-href="#/materials/{{material._id}}">edit</a></td>
+    </tr>
+    </tbody>
+</table>
 
 <ul class="pagination">
     <li><a ng-click="decCurrentPage()">&laquo;</a></li>
     <li ng-class="{active: currentPage == page}" ng-repeat="page in pages"><a >{{page + 1}}</a></li>
     <li><a ng-click="incCurrentPage()">&raquo;</a></li>
 </ul>
-
+<div><a href="#/materials/new" class="btn btn-primary" role="button">New Material</a></div>

@@ -4,7 +4,7 @@ var db = require('../../db');
 var Users = db.model('Users');
 
 router.put('/', function(req, res) {
-    //добавить юзерс
+    //РґРѕР±Р°РІРёС‚СЊ СЋР·РµСЂСЃ
 
     console.log(req.body.name);
     console.log(req.body.password);
@@ -19,11 +19,11 @@ router.put('/', function(req, res) {
 });
 
 router.get('/', function(req, res) {
-    var v = Users.find({}, function (err, us) {
+    var v = Users.find({}, function (err, users) {
         if( err) {
             console.log("Exception");
         } else {
-            res.send(us);
+            res.send(users);
         }
     });
 });

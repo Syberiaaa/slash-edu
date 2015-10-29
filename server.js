@@ -22,8 +22,11 @@ passport.use(new Strategy(
     db.model('Users').findOne({email: username}, function(err, user) {
       if (err) { return cb(err); }
       if (!user) { return cb(null, false); }
-      if (passwordHash.verify(user.password, password)) { return cb(null, false); }
-      return cb(null, user);
+      if (passwordHash.verify(password, user.password)) {
+        return cb(null, user);
+      } else {
+        return cb(null, false);
+      }
     });
   }));
 

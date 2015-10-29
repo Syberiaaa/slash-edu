@@ -1,11 +1,9 @@
-/**
- * Created by снежный барс on 14.10.2015.
- */
 var Utils = {};
 
 Utils.getUserRoles = function() {
     return ['admin', 'teacher', 'student', 'unAuthorizedUser', 'user'];
-}
+};
+
 Utils.getUserRights = function(userRole) {
     console.log(typeof(userRole))
     if(typeof(userRole) == 'string') {
@@ -21,6 +19,6 @@ Utils.getUserRights = function(userRole) {
     } else {
       throw new Error("User role must be of type \"String\"")
     }
-}
+};
 
 module.exports = Utils;

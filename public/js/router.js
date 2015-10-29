@@ -9,6 +9,10 @@ slashEduApp.config(['$routeProvider',
         templateUrl: 'partials/courses.html',
         controller: 'CoursesCtrl'
       }).
+      when('/courses/:coursesId', {
+        templateUrl: 'partials/courseEdit.html',
+        controller: 'CoursesEditCtrl'
+      }).
       when('/login', {
         templateUrl: 'partials/login.html',
         controller: 'LoginCtrl'

@@ -1,14 +1,20 @@
 <h2>My Courses</h2>
 
-<table class="table">
+<table class="table table-striped">
+    <thed>
     <tr>
         <th>#</th>
         <th>Name</th>
         <th>Author</th>
     </tr>
+    </thed>
+    <tbody>
     <tr ng-repeat="course in courses">
         <td>{{course._id}}</td>
         <td>{{course.name}}</td>
         <td>{{course.author}}</td>
     </tr>
+    </tbody>
 </table>
+
+<div><a href="#/courses/new" class="btn btn-primary" role="button">New Course</a></div>

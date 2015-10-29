@@ -28,8 +28,8 @@ module.exports = function(mongoose) {
   var Users = mongoose.model('Users', usersSchema);
 
   Users.count({}, function(err, cnt) {
-    if (cnt === 1) {
-      var admin = new Users({name: "vasya", email: 'vasya@isu.ru', password: '123456', role: "admin"});
+    if (cnt === 0) {
+      var admin = new Users({name: "admin", email: 'admin@isu.ru', password: '123456', role: "admin"});
       admin.save(function(err) {
         if (err) console.error(err);
       });
