@@ -18,6 +18,13 @@ PagesControllers.controller('MaterialsCtrl', ['$scope', '$http',
                 $scope.currentPage--; $scope.numberMaterial-=$scope.itemsPerPage;}
         };
 
+        $scope.deleteMaterial = function(materialId) {
+            $http.delete('/api/materials/'+materialId)
+                .then(function(res) {
+
+                });
+        };
+
         $http.get('/api/materials')
             .then(function(response){
                 $scope.materials = response.data;
