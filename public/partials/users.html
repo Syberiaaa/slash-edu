@@ -1,41 +1,29 @@
-
 <h2>Users</h2>
-<!--<div class="row">
-    <div class="cocol-md-9 col-md-push-3l-md-9 col-md-push-3">name users</div>
-</div>
-    <div class="row">
-        <div class="col-md-3 col-md-pull-9">@mail.ru</div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">rol</div>
-    </div>-->
-
-
-<p>or edit <a href="#/users/admin@isu.ru">existing</a></p>
-<table border="1">
+<table class="table table-striped">
+    <thead>
     <tr>
-        <td>Id</td>
-        <td>Name</td>
-        <td>Email</td>
-        <td>Role</td>
+
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
 
     </tr>
+    </thead>
     <tr ng-repeat="user in users">
-        <td>{{user._id}}</td>
+
         <td>{{user.name}}</td>
         <td>{{user.email}}</td>
         <td>{{user.role}}</td>
-        <td><button type="submit" ng-click="user()">Edit</button></td>
+
+        <td><a type="button" class="btn btn-xs btn-default" role="button" ng-href="#/users/{{user._id}}">edit</a></td>
     </tr>
 </table>
 
-<div class="row">
-    <div class="col-xs-12 col-sm-6 col-md-5">NameUsers
-        <input type="text" class="form-control">
-    </div>
-    <div class="col-xs-6 col-md-4">Login
-        <input type="text" class="form-control">
-        <button class="btn btn-default" type="button">Go!</button>
-    </div>
-</div>
+<ul class="pagination">
+    <li><a ng-click="decCurrentPage()">&laquo;</a></li>
+    <li ng-class="{active: currentPage == page}" ng-repeat="page in pages"><a >{{page + 1}}</a></li>
+    <li><a ng-click="incCurrentPage()">&raquo;</a></li>
+</ul>
+
+
 
