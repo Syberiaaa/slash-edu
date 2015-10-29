@@ -13,7 +13,10 @@
         <td>{{$index + 1 + (currentPage * 3)}}</td>
         <td>{{material.name}}</td>
         <td>{{material.type}}</td>
-        <td><a type="button" class="btn btn-xs btn-default" role="button" ng-href="#/materials/{{material._id}}">edit</a></td>
+        <td>
+            <a type="button" class="btn btn-xs btn-default" role="button" ng-href="#/materials/{{material._id}}">edit</a>
+            <a type="button" class="btn btn-xs btn-default" role="button" ng-click="deleteMaterial(material._id)">delete</a>
+        </td>
     </tr>
     </tbody>
 </table>
