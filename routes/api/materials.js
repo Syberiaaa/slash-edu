@@ -20,15 +20,16 @@ router.put('/', function(req, res) {
   });
 
   newMat.save(function(err) {
+
     if (err) res.sendStatus(400);
     else res.sendStatus(200);
   });
 });
 
 router.get('/', function(req,res) {
-  // TODO issue #8
-
-  res.send('not implemented yet');
+  Materials.find(function(err, materials){
+    res.send(materials);
+  });
 });
 
 router.get('/:materialId', function(req, res) {
