@@ -1,0 +1,14 @@
+<h2>My Courses</h2>
+
+<table class="table">
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Author</th>
+    </tr>
+    <tr ng-repeat="course in courses">
+        <td>{{course._id}}</td>
+        <td>{{course.name}}</td>
+        <td>{{course.author}}</td>
+    </tr>
+</table>
