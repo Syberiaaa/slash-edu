@@ -4,13 +4,28 @@ var db = require('../../db');
 var Users = db.model('Users');
 
 router.put('/', function(req, res) {
-    // TODO issue #1
+    //добавить юзерс
+
+    console.log(req.body.name);
+    console.log(req.body.password);
+    console.log(req.body.email);
+    var user = new Users ({ name: req.body.name,
+                            password: req.body.password,
+                            email: req.body.email,
+                            role: "user"});
+
+    user.save();
     res.send('not implemented yet');
 });
 
 router.get('/', function(req, res) {
-    // TODO issue #2
-    res.send('not implemented yet');
+    var v = Users.find({}, function (err, us) {
+        if( err) {
+            console.log("Exception");
+        } else {
+            res.send(us);
+        }
+    });
 });
 
 router.get('/:email', function(req, res) {
