@@ -27,7 +27,9 @@ router.put('/', function(req, res) {
 });
 
 router.get('/', function(req,res) {
+
   Materials.find(function(err, materials){
+
     res.send(materials);
   });
 });
