@@ -1,1 +1,44 @@
-course editor
+<form role="form"><br>
+    <div class="form-group">
+    <input ng-model="name" type="text" class="form-control" placeholder="Name of course">
+</div>
+</form>
+<table class="table table-striped">
+    <td>
+<table class="table table-striped">
+    <thed>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Author</th>
+        </tr>
+    </thed>
+    <tbody>
+    <tr ng-repeat="material in materials">
+        <td>{{$index + 1}}</td>
+        <td>{{material.name}}</td>
+        <td>{{material.type}}</td>
+    </tr>
+    </tbody>
+</table>
+    </td>
+
+<td>
+<table class="table table-striped">
+    <thed>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Author</th>
+        </tr>
+    </thed>
+    <tbody>
+    <tr ng-repeat="material in materials">
+        <td>{{$index + 1}}</td>
+        <td>{{material.name}}</td>
+        <td>{{material.type}}</td>
+    </tr>
+    </tbody>
+</table>
+</td>
+</table>
