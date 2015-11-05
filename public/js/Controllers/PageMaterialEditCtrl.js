@@ -7,6 +7,15 @@ PagesControllers.controller('MaterialEditCtrl', ['$scope', '$http', '$location',
 
         $scope.materialId = $routeParams.materialId;
 
+        if($scope.materialId !== 'new'){
+            $http.get('/api/materials/'+$scope.materialId)
+                .then(function (res) {
+                    $scope.name = res.data.name;
+                    $scope.type = res.data.type;
+                    $scope.src  = res.data.data.src;
+                    $scope.editor.setValue($scope.src);
+                });
+        }
 
         $scope.preview = function () {
             $scope.src = $scope.editor.getValue();
@@ -33,14 +42,24 @@ PagesControllers.controller('MaterialEditCtrl', ['$scope', '$http', '$location',
             }).then(function (response) {
                 $location.path('/materials');
             });
-        }
+        };
+
+        $scope.update = function () {
+            $scope.src = $scope.editor.getValue();
+            $http.post('/api/materials/' + $scope.materialId, {
+                name: $scope.name,
+                type: $scope.type,
+                src: $scope.src
+            }).then(function (response) {
+                $location.path('/materials');
+            });
+        };
+
         $('#myTab a').click(function (e) {
-            e.preventDefault()
-            $(this).tab('show')
-        })
+            e.preventDefault();
+            $(this).tab('show');
+        });
         $scope.editor = ace.edit("editor");
         $scope.editor.getSession().setMode("ace/mode/markdown");
-
-
     }
 ]);

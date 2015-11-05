@@ -10,7 +10,7 @@ module.exports = function(mongoose) {
     role: {type: String, enum: Utils.getUserRoles()},
     groupId: Schema.ObjectId
   }, {
-    toJSON:   {virtuals: true },
+    toJSON:   {virtuals: true},
     toObject: {virtuals: true}
   });
 
