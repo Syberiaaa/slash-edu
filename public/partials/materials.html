@@ -1,4 +1,17 @@
-<h2>Materials</h2>
+<ol class="breadcrumb">
+    <li><a href="#/">Home</a></li>
+    <li class="active">Materials</li>
+</ol>
+
+   <div class="createGroup">Login
+       <input type="text" class="form-control">
+       <button ng-click="createGroup()" class="btn btn-primary" type="button">Create</button>
+   </div>
+
+  <ul>
+      <li ng-repeat="mg in materialGroups" >{{materialGroups.name}}</li>
+  </ul>
+
 <table class="table table-striped">
     <thead>
     <tr>
@@ -13,7 +26,10 @@
         <td>{{$index + 1 + (currentPage * 3)}}</td>
         <td>{{material.name}}</td>
         <td>{{material.type}}</td>
-        <td><a type="button" class="btn btn-xs btn-default" role="button" ng-href="#/materials/{{material._id}}">edit</a></td>
+        <td>
+            <a type="button" class="btn btn-xs btn-default" role="button" ng-href="#/materials/{{material._id}}">edit</a>
+            <a type="button" class="btn btn-xs btn-default" role="button" ng-click="deleteMaterial(material._id)">delete</a>
+        </td>
     </tr>
     </tbody>
 </table>

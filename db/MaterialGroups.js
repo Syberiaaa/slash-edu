@@ -1,7 +1,8 @@
 module.exports = function(mongoose) {
-    // TODO issue #10
-
     var materialGroupsSchema = mongoose.Schema({
+        name: String,
+        parent:  mongoose.Schema.Types.ObjectId,
+        owner:   mongoose.Schema.Types.ObjectId
     });
 
     var MaterialGroups = mongoose.model('MaterialGroups', materialGroupsSchema);

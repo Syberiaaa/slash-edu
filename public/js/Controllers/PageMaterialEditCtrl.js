@@ -20,12 +20,16 @@ PagesControllers.controller('MaterialEditCtrl', ['$scope', '$http', '$location',
                                 MathJax.Hub.Queue(['Typeset', MathJax.Hub, document.scripts[i]]);
                             }
                         }
+                        $('pre code').each(function(i, block) {
+                            hljs.highlightBlock(block);
+                        });
                     }, 500);
                 });
         };
 
         $scope.add = function () {
             $scope.src = $scope.editor.getValue();
+
             $http.put('/api/materials', {
                 name: $scope.name,
                 type: $scope.type,
@@ -34,6 +38,9 @@ PagesControllers.controller('MaterialEditCtrl', ['$scope', '$http', '$location',
                 $location.path('/materials');
             });
         }
+
+
+
         $('#myTab a').click(function (e) {
             e.preventDefault()
             $(this).tab('show')
