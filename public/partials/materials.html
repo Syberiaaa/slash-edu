@@ -1,4 +1,19 @@
-<h2>Materials</h2>
+<ol class="breadcrumb">
+    <li><a href="#/">Home</a></li>
+    <li class="active">Materials</li>
+</ol>
+
+   <div class="createGroup">Login
+       <input ng-model="name" type="text" class="form-control">
+       <button ng-click="createGroup()" class="btn btn-primary" type="button">Create</button>
+   </div>
+
+  <ul>
+      <li ng-click="printChildrens()" ng-repeat="mg in materialGroups | filter: {parent: null}" >
+          {{mg.name}}
+      </li>
+  </ul>
+
 <table class="table table-striped">
     <thead>
     <tr>
