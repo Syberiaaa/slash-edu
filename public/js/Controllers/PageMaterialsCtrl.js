@@ -6,6 +6,7 @@ PagesControllers.controller('MaterialsCtrl', ['$scope', '$http',
         $scope.itemsPerPage = 10;
         $scope.numberMaterial = 0;
         $scope.materialGroups = [];
+        $scope.name='';
 
         $scope.setCurrentPage = function(val) {$scope.currentPage = val;};
         $scope.incCurrentPage = function()  {
@@ -18,32 +19,44 @@ PagesControllers.controller('MaterialsCtrl', ['$scope', '$http',
                 $scope.currentPage--; $scope.numberMaterial-=$scope.itemsPerPage;}
         };
 
-        $scope.deleteMaterial = function(materialId) {
+        $scope.deleteMaterial = function(materialId,i) {
             $http.delete('/api/materials/'+materialId)
                 .then(function(res) {
-
+                        $scope.materials.splice(i,1);
                 });
         };
 
         $http.get('/api/materials')
             .then(function(response){
                 $scope.materials = response.data;
-
                 $scope.pages = [];
                 for(var i = 0; i < $scope.materials.length / $scope.itemsPerPage; i++) $scope.pages.push(i);
             });
-        $http.get('/api/materialGroups')
-            .then(function(response){
-                $scope.materialGroups = response.data;
-            });
+
+        function updateMaterialGroups(){
+            $http.get('/api/materialGroups')
+                .then(function(response) {
+                    $scope.materialGroups = response.data;
+                }
+            );
+        }
+        updateMaterialGroups();
 
         $scope.createGroup  = function () {
+
              $http.put('/api/materialGroups', {
-             name: $scope.name,
-             parent: null
-             }).then(function (response) {
-             $location.path('/materialGroups');
+                 name: $scope.name,
+                 parent: null
+             }).then(function() {
+                 updateMaterialGroups();
              });
+        }
+        $scope.printChildrens = function()
+        {
+            $http.get('/api/materials', {id: $scope.materialGroupsID})
+                .then(function(response) {
+                    $scope.materialGroups = response.data;
+                });
         }
     }
 ]);

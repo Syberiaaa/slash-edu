@@ -31,6 +31,10 @@
             </div>
         </div>
     </div><!-- /example -->
-        <button ng-click="add()" type="button" class="btn btn-primary">Add</button>
+
+
+    <button ng-click="add()" type="button" class="btn btn-primary" ng-show="materialId == 'new'">Add</button>
+    <button ng-click="update()" type="button" class="btn btn-primary" ng-hide="materialId == 'new'">Save</button>
+    <button ng-click="del()" type="button" class="btn btn-primary" ng-hide="materialId == 'new'">Delete</button>
 </form>
 

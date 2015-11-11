@@ -9,15 +9,19 @@ router.post('/preview', function(req, res) {
   res.send(html);
 });
 
-router.put('/', function(req, res) {
-  var newMat = new Materials({
-    name: req.body.name,
-    type: req.body.type,
+function createMaterialObject(req_body) {
+  return {
+    name: req_body.name,
+    type: req_body.type,
     data: {
-      src: req.body.src,
-      html: kramed(req.body.src)
+      src: req_body.src,
+      html: kramed(req_body.src)
     }
-  });
+  };
+}
+
+router.put('/', function(req, res) {
+  var newMat = new Materials(createMaterialObject(req.body));
 
   newMat.save(function(err) {
 
@@ -27,27 +31,41 @@ router.put('/', function(req, res) {
 });
 
 router.get('/', function(req,res) {
+
   Materials.find(function(err, materials){
+
     res.send(materials);
-  });
+ });
 });
 
 router.get('/:materialId', function(req, res) {
-  // TODO issue #9
 
-  res.send('not implemented yet');
+  Materials.findById(req.params.materialId, function (err, material){
+    if(err) returnError(err);
+    material.save(function(err){
+      if(err) return andleError(err);
+      res.send({
+        data: material.data,
+        name: material.name,
+        type: material.type
+      });
+    });
+  });
 });
 
 router.post('/:materialId', function(req, res) {
-  // TODO issue #9
 
-  res.send('not implemented yet');
+  Materials.findByIdAndUpdate(req.params.materialId, { $set: createMaterialObject(req.body)}, function (err, material) {
+    if (err) return handleError(err);
+    res.send(material);
+  });
+
 });
 
 router.delete('/:materialId', function(req, res) {
-  // TODO issue #9
-
-  res.send('not implemented yet');
+  Materials.findOneAndRemove(req.params.materialId, function(err) {
+    res.sendStatus(200);
+  });
 });
 
 
