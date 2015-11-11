@@ -45,9 +45,9 @@ router.post('/:materialId', function(req, res) {
 });
 
 router.delete('/:materialId', function(req, res) {
-  // TODO issue #9
-
-  res.send('not implemented yet');
+  Materials.findOneAndRemove(req.params.materialId, function(err) {
+    res.sendStatus(200);
+  });
 });
 
 
