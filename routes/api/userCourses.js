@@ -9,16 +9,16 @@ router.put('/', function(req, res) {
 });
 
 router.get('/', function(req, res) {
-    // TODO issue #4
-    res.send('not implemented yet');
+    UserCourses.find(function(err, userCourses){
+        res.send(userCourses);
+    });
 });
 
 router.get('/:coursesId', function(req, res) {
-
-        Courses.find(function(err, courses){
-            res.send(courses);
-        });
-  });
+    Courses.find(function(err, courses){
+        res.send(courses);
+    });
+});
 
 router.post('/:coursesId', function(req, res) {
     // TODO issue #4
