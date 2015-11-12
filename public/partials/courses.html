@@ -4,8 +4,6 @@
 </ol>
 <h2>My Courses</h2>
 
-<div><a href="#/courses/new" class="btn btn-primary" role="button">New Course</a></div>
-
 <table class="table table-striped">
     <thed>
     <tr>
@@ -23,4 +21,11 @@
     </tbody>
 </table>
 
-<h2>Student Courses</h2>
+<ul class="pagination">
+    <li><a ng-click="decCurrentPage()">&laquo;</a></li>
+    <li ng-class="{active: currentPage == page}" ng-repeat="page in pages"><a >{{page + 1}}</a></li>
+    <li><a ng-click="incCurrentPage()">&raquo;</a></li>
+</ul>
+
+<div><a href="#/courses/new" class="btn btn-primary" role="button">New Course</a></div>
+

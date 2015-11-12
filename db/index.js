@@ -6,5 +6,6 @@ require('./Users.js')(mongoose);
 require('./MaterialGroups.js')(mongoose);
 require('./Materials.js')(mongoose);
 require('./Courses.js')(mongoose);
+require('./UserCourses.js')(mongoose);
 
 module.exports = mongoose;
