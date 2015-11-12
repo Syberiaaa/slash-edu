@@ -9,7 +9,7 @@ slashEduApp.config(['$routeProvider',
         templateUrl: 'partials/courses.html',
         controller: 'CoursesCtrl'
       }).
-      when('/courses/:coursesId', {
+      when('/courses/:courseId', {
         templateUrl: 'partials/courseEdit.html',
         controller: 'CoursesEditCtrl'
       }).
@@ -33,9 +33,21 @@ slashEduApp.config(['$routeProvider',
         templateUrl: 'partials/users.html',
         controller: 'UsersCtrl'
       }).
-      when('/users/:email', {
+      when('/users/:userId', {
         templateUrl: 'partials/userEdit.html',
         controller: 'UserEditCtrl'
+      }).
+      when('/go', {
+        templateUrl: 'partials/go.html',
+        controller: 'GoCtrl'
+      }).
+      when('/go/:courseId', {
+        templateUrl: 'partials/goCourse.html',
+        controller: 'GoCourseCtrl'
+      }).
+      when('/go/:courseId/:materialId', {
+        templateUrl: 'partials/goMaterial.html',
+        controller: 'GoMaterialCtrl'
       }).
       otherwise({
         redirectTo: '/'

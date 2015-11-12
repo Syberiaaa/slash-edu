@@ -19,17 +19,16 @@ PagesControllers.controller('MaterialsCtrl', ['$scope', '$http',
                 $scope.currentPage--; $scope.numberMaterial-=$scope.itemsPerPage;}
         };
 
-        $scope.deleteMaterial = function(materialId) {
+        $scope.deleteMaterial = function(materialId,i) {
             $http.delete('/api/materials/'+materialId)
                 .then(function(res) {
-
+                        $scope.materials.splice(i,1);
                 });
         };
 
         $http.get('/api/materials')
             .then(function(response){
                 $scope.materials = response.data;
-
                 $scope.pages = [];
                 for(var i = 0; i < $scope.materials.length / $scope.itemsPerPage; i++) $scope.pages.push(i);
             });
