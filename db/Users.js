@@ -1,5 +1,5 @@
 var passwordHash = require('password-hash');
-var Utils = require("../Utils/Utils.js");
+var Utils = require("../utils/Utils.js");
 
 module.exports = function(mongoose) {
   var  Schema = mongoose.Schema;
@@ -10,7 +10,7 @@ module.exports = function(mongoose) {
     role: {type: String, enum: Utils.getUserRoles()},
     groupId: Schema.ObjectId
   }, {
-    toJSON:   {virtuals: true },
+    toJSON:   {virtuals: true},
     toObject: {virtuals: true}
   });
 
