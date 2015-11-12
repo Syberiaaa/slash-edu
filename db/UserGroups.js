@@ -1,10 +1,8 @@
 module.exports = function(mongoose) {
-    // TODO issue #4
-    var Schema = mongoose.Schema;
-    var userGroupsSchema = mongoose.Schema({
-        name:   String,
-        parent: Schema.ObjectId
-    });
+var userGroupsSchema = mongoose.Schema({
+    name: String,
+    parent: mongoose.Schema.Types.ObjectId
+});
 
-    var UserGroups = mongoose.model('UserGroups', userGroupsSchema);
+var UserGroups = mongoose.model('UserGroups', userGroupsSchema);
 };

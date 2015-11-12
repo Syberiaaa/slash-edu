@@ -22,11 +22,28 @@
     </tr>
 </table>
 
+
 <ul class="pagination">
     <li><a ng-click="decCurrentPage()">&laquo;</a></li>
     <li ng-class="{active: currentPage == page}" ng-repeat="page in pages"><a >{{page + 1}}</a></li>
     <li><a ng-click="incCurrentPage()">&raquo;</a></li>
 </ul>
+
+
+
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Group</th>
+        <th>>ID</th>
+    </tr>
+</table>
+    <tr ng-repeat="user in users">
+
+
+        <td><a type="button" class="btn btn-xs btn-default" role="button" ng-href="#/users/{{user._id}}">edit</a></td>
+
 
 
 
