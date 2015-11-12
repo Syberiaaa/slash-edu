@@ -1,4 +1,5 @@
 PagesControllers.controller('MainCtrl', ['$scope',
-  function($scope) {
+  function($scope, $http) {
   }
 ]);
+
