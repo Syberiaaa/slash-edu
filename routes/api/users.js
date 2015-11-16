@@ -38,10 +38,16 @@ router.get('/:userId', function(req, res) {
 });
 
 router.post('/:userId', function(req, res) {
-    Users.findOneAndUpdate({id: req.params.userId}, { name: req.body.name,
-        email: req.body.email,
-        password: req.body.password,
-        role: req.body.role}, function (err) {});
+    var updUser = {};
+    updUser.name = req.body.name;
+    updUser.email = req.body.email;
+    updUser.role = req.body.role;
+
+    if(req.body.password  === undefined) {}
+    else { updUser.password = req.body.password;}
+
+    Users.findOneAndUpdate({id: req.params.userId}, updUser, function (err) {});
+
 });
 
 router.delete('/:userId', function(req, res) {

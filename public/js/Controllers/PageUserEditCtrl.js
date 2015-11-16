@@ -5,23 +5,26 @@ PagesControllers.controller('UserEditCtrl', ['$scope', '$http', '$routeParams', 
         $scope.name = "";
         $scope.email = "";
         $scope.role = "";
-        $http.get("api/users/:userId").then( function(response) {
-            $scope.name = response.name;
-            $scope.email = response.email;
-            $scope.role = response.role;
+        $http.get("api/users/"+$scope.userId).then( function(response) {
+            $scope.name = ""+response.data.name;
+            $scope.email = response.data.email;
+            $scope.role = response.data.role;
         });
         $scope.save = function () {
             var edUser = {};
             edUser.email = $scope.email;
             edUser.name = $scope.name;
-            edUser.password = $scope.newPassword;
+            if($scope.newPassword === "") {
+                edUser.password = undefined;
+            } else {
+                edUser.password = $scope.newPassword;
+            }
             edUser.role = $scope.role;
-            $http.post("api/users/:userId", edUser).then( function(response) {
+            $http.post("api/users/"+$scope.userId, edUser).then( function(response) {
             });
-
-        }
+        };
         $scope.delete = function() {
-            $http.delete("api/users/:userId").then(function (response) {});
+            $http.delete("api/users/"+$scope.userId).then(function (response) {});
             $location.path("/users");
         }
 
