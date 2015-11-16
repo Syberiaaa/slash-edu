@@ -28,19 +28,28 @@ router.get('/', function(req, res) {
     });
 });
 
-router.get('/:email', function(req, res) {
-    // TODO issue #3
-    res.send('not implemented yet');
+router.get('/:userId', function(req, res) {
+    Users.findById(req.params.userId, function(err, user) {
+        if (err) {
+            console.error(err);
+        }
+        res.send(user);
+    });
 });
 
-router.post('/:email', function(req, res) {
-    // TODO issue #3
-    res.send('not implemented yet');
+router.post('/:userId', function(req, res) {
+    Users.findOneAndUpdate({id: req.params.userId}, { name: req.body.name,
+        email: req.body.email,
+        password: req.body.password,
+        role: req.body.role}, function (err) {});
 });
 
-router.delete('/:email', function(req, res) {
-    // TODO issue #3
-    res.send('not implemented yet');
+router.delete('/:userId', function(req, res) {
+    Users.remove({id: req.params.userId}, function (err) {
+        if(err) {
+            console.error(err);
+        }
+    });
 });
 
 module.exports = router;
