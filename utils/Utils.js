@@ -5,7 +5,6 @@ Utils.getUserRoles = function() {
 };
 
 Utils.getUserRights = function(userRole) {
-    console.log(typeof(userRole))
     if(typeof(userRole) == 'string') {
         switch (userRole) {
             case 'admin'  : return ['materials.create', 'materials.request', 'users.create', 'users.request'];

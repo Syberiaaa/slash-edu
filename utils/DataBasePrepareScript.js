@@ -35,7 +35,6 @@ module.exports = function(mongoose) {
                     new Groups({name: "anyGroup", parent: rootID})
                 ];
             saveAll(rootGroups, function (results) {
-                console.log(results);
                 var otherGroups = [
                     new Groups({name: "4FI", parent: results[2]._id}),
                     new Groups({name: "4PI", parent: results[2]._id}),
@@ -45,7 +44,6 @@ module.exports = function(mongoose) {
                     new Groups({name: "Society for the Protection of chinchillas", parent: results[5]._id}),
                 ];
                 saveAll(otherGroups, function (results2) {
-                    console.log(results2);
                     var addUsers = [
                         new Users({email: "admin@isu.ru",      password: "123456",     name: "admin",          role: "admin",   groupId: results[1]._id}),
                         new Users({email: "msergey@isu.ru",    password: "msergey",    name: "sergey",         role: "student", groupId: results2[1]._id}),
@@ -68,7 +66,7 @@ module.exports = function(mongoose) {
                         new Users({email: "egor@isu.ru",       password: "egor",       name: "egor",           role: "student", groupId: results2[0]._id}),
                         new Users({email: "zhenya@isu.ru",     password: "zhenya",     name: "evgeniy",        role: "student", groupId: results2[0]._id})
                     ];
-                    saveAll(addUsers, function(res3){ console.log(res3) }, function(){});
+                    saveAll(addUsers, function(res3){ }, function(err){ if(err) console.log(err); });
 
                 }, function (err) { if(err) {console.log(err)} });
             }, function (err) { if(err) {console.log(err)} });

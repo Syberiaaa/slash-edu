@@ -20,8 +20,8 @@ PagesControllers.controller('UserEditCtrl', ['$scope', '$http', '$routeParams', 
                 edUser.password = $scope.newPassword;
             }
             edUser.role = $scope.role;
-            $http.post("api/users/"+$scope.userId, edUser).then( function(response) {
-            });
+            $http.post("api/users/"+$scope.userId, edUser).then( function(response) {});
+            $location.path("/users");
         };
         $scope.delete = function() {
             $http.delete("api/users/"+$scope.userId).then(function (response) {});

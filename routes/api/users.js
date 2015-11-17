@@ -5,10 +5,6 @@ var Users = db.model('Users');
 
 router.put('/', function(req, res) {
     //добавить юзерс
-
-    console.log(req.body.name);
-    console.log(req.body.password);
-    console.log(req.body.email);
     var user = new Users ({ name: req.body.name,
                             password: req.body.password,
                             email: req.body.email,
@@ -46,12 +42,12 @@ router.post('/:userId', function(req, res) {
     if(req.body.password  === undefined) {}
     else { updUser.password = req.body.password;}
 
-    Users.findOneAndUpdate({id: req.params.userId}, updUser, function (err) {});
+    Users.findOneAndUpdate({ _id: req.params.userId}, updUser, function (err) {});
 
 });
 
 router.delete('/:userId', function(req, res) {
-    Users.remove({id: req.params.userId}, function (err) {
+    Users.remove({ _id: req.params.userId}, function (err) {
         if(err) {
             console.error(err);
         }
