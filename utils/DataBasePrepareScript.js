@@ -52,7 +52,7 @@ module.exports = function(mongoose) {
                         new Users({email: "fmaksim@isu.ru",    password: "fmaksim",    name: "maksim",         role: "student", groupId: results2[1]._id}),
                         new Users({email: "dartyom@isu.ru",    password: "dartem",     name: "artyom",         role: "student", groupId: results2[1]._id}),
                         new Users({email: "kalexey@isu.ru",    password: "kalexey",    name: "alexey",         role: "teacher", groupId: results2[3]._id}),
-                        new Users({email: "moderator@isu.ru",  password: "moderator",  name: "moderatorovich", role: "admin",   groupId: results2[5]._id}),
+                        new Users({email: "moderator@isu.ru",  password: "moderator",  name: "moderatorovich", role: "admin",   groupId: results2[4]._id}),
                         new Users({email: "lkolya@isu.ru",     password: "lkolya",     name: "nikolay",        role: "teacher", groupId: results2[1]._id}),
                         new Users({email: "myana@isu.ru",      password: "myana",      name: "yana",           role: "teacher", groupId: results2[2]._id}),
                         new Users({email: "user@isu.ru",       password: "user",       name: "userovich",      role: "user",    groupId: results[3]._id}),
