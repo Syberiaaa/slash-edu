@@ -14,12 +14,33 @@ PagesControllers.controller('UsersCtrl', ['$scope', '$http',
       return false;
     };
 
+    function getUsersData() {
+      $http.get('/api/users').then(function(res){
+        $scope.users = res.data;
+        $scope.allUsers = res.data;
+      });
+    }
+
+    function getGroupsData() {
+      $http.get("/api/userGroups").then(
+          function ( response ) {
+            $scope.groups = response.data.groups;
+            $scope.groupsTree = response.data.groupsTree;
+          }
+      );
+    }
+
     $scope.users = [];
     $scope.groups = [];
     $scope.allUsers  = [];
     $scope.groupsTree;
-    $scope.userGroupFilter;
+    $scope.userGroupFilter = "all groups";
     $scope.userNameFilter;
+    $scope.nameOfNewGroup = "";
+    $scope.parentOfNewGroup = undefined;
+    $scope.createNewGroup;
+
+    //$scope.userGroupFilter = "all groups";
 
     $scope.findUserFilter = function(event) {
       var nameFilter = $scope.userNameFilter;
@@ -51,26 +72,54 @@ PagesControllers.controller('UsersCtrl', ['$scope', '$http',
       }
       $scope.users = newUsers;
     };
-
-    $scope.userGroupFilter = "all groups";
-
-    $http.get('/api/users').then(function(res){
-      $scope.users = res.data;
-      $scope.allUsers = res.data;
+    $('#groupCreateVoidNameGroupMessage').collapse({
+      toggle: true
     });
+    $('#groupCreateVoidParentGroupMessage').collapse({
+      toggle: true
+    });
+    $scope.createNewGroup = function () {
+      var voidNameMessage = $("#groupCreateVoidNameGroupMessage");
+      var voidParentMessage = $("#groupCreateVoidParentGroupMessage");
+      //voidNameMessage.collapse();
+      //voidParentMessage.collapse({toggle: true});
 
-    $http.get("/api/userGroups").then(
-        function ( response ) {
-          $scope.groups = response.data.groups;
-          $scope.groupsTree = response.data.groupsTree;
-        }
-    );
+      var validate = true;
+      if($scope.parentOfNewGroup == undefined) {
+        validate = false;
+        voidParentMessage.collapse("show");
+      } else { voidParentMessage.collapse("hide"); }
+      if( $scope.nameOfNewGroup == "" ) {
+        validate = false;
+        voidNameMessage.collapse("show");
+      } else { voidNameMessage.collapse("hide"); }
+      if(validate) {
+        var newGroup = {};
+        newGroup.name = $scope.nameOfNewGroup;
+        newGroup.parent = $scope.parentOfNewGroup;
+        $http.put('/api/userGroups', newGroup).success(function (data, status) {
+              getGroupsData();
+              $("#createNewGroupDialogModal").modal('hide');
+            }
+        ).error(function (data, status) {
+              console.err("Error in group create request" + status);
+              $("#createNewGroupDialogModal").modal('hide');
+            }
+        );
+      }
 
+    };
+
+    getUsersData();
+    getGroupsData();
+
+    // Where to use this code? -------------------
     $scope.user = function() {
       $http.put('/api/users', {
       }).then(function(response) {
         $location.path('/users/'+user._id);
       });
     }
+    //---------------------------------------------
   }
 ])
