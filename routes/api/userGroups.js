@@ -41,7 +41,7 @@ function buildGroupsTree (groups, group) {
 };
 
 router.put('/', function(req, res) {
-    var newUserGroups = new UserGroups({
+    /*var newUserGroups = new UserGroups({
         name: req.body.name,
         parent:  {
             src: req.body.src,
@@ -49,9 +49,14 @@ router.put('/', function(req, res) {
         }
 
     });
+    */
 
-    newUserGroups.save(function(err) {
+    var newUserGroup = new UserGroups({
+        name: req.body.name,
+        parent: req.body.parent
+    });
 
+    newUserGroup.save(function(err) {
         if (err) res.sendStatus(400);
         else res.sendStatus(200);
     });
@@ -77,7 +82,7 @@ router.get('/:groupId', function(req, res) {
 router.post ('/:groupId', function(req, res){
     UserGroups.success(function (UserGroups) {
             console.log('UserGroups:', UserGroups);
-        })
+        });
     res.send(UserGroups);
 });
 

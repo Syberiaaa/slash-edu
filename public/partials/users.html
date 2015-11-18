@@ -7,30 +7,29 @@
         <div class="col-md-8">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="text-center">Users</h2>
+                    <h2 class="text-center">Пользователи</h2>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <input ng-model="userNameFilter" ng-change="findUserFilter($event)" type="text" class="form-control input-sm" placeholder="Введите имя пользователя">
+                    <input ng-model="userNameFilter" ng-change="findUserFilter($event)" type="text" class="form-control" placeholder="Введите имя пользователя">
                 </div>
                 <div class="col-md-6">
-                    <select ng-model="userGroupFilter" ng-change="findUserFilter($event)" class="form-control input-sm">
+                    <select ng-model="userGroupFilter" ng-change="findUserFilter($event)" class="form-control">
                         <option value="all groups">Все группы</option>
                         <option ng-repeat="group in groups" value="{{group._id}}">{{group.name}}</option>
                     </select>
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row margin-top-20">
                 <div class="col-md-12">
                 <table class="table table-striped table-bordered table-hover">
-                    <thead>
+                    <thead class="thead-default">
                     <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-
+                        <th>Имя</th>
+                        <th>Электронная почта</th>
+                        <th>Роль</th>
                     </tr>
                     </thead>
                     <tr ng-repeat="user in users">
@@ -40,7 +39,7 @@
                         <td>{{user.role}}</td>
 
                         <td><a type="button" class="btn btn-xs btn-default" role="button"
-                               ng-href="#/users/{{user._id}}">edit</a>
+                               ng-href="#/users/{{user._id}}">Редактировать</a>
                         </td>
                     </tr>
                 </table>
@@ -48,19 +47,26 @@
             </div>
         </div>
         <div class="col-md-4">
-            <h2 class="text-center">Groups</h2>
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Group</th>
-                    <th>ID</th>
-                </tr>
-                </thead>
-                <tr ng-repeat="group in groups">
-                    <td>{{group.name}}</td>
-                    <td>{{group._id}}</td>
-                </tr>
-            </table>
+            <div class="row">
+                <h2 class="text-center">Группы</h2>
+                <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#createNewGroupDialogModal">
+                    Создать группу
+                </button>
+            </div>
+            <div class="row margin-top-20">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Группа</th>
+                        <th>ID</th>
+                    </tr>
+                    </thead>
+                    <tr ng-repeat="group in groups">
+                        <td>{{group.name}}</td>
+                        <td>{{group._id}}</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </div>
@@ -70,6 +76,59 @@
     <li><a ng-click="incCurrentPage()">&raquo;</a></li>
 </ul>
 
+<!-- Dialog box to create  a new group-->
+<div class="modal fade" id="createNewGroupDialogModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Создание группы</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 class="text-left">Имя группы</h4>
+                        <input ng-model="nameOfNewGroup" class="form-control" type="text"
+                               placeholder="Введите имя группы">
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="text-left">Родительская группа</h4>
+                        <select ng-model="parentOfNewGroup" class="form-control">
+                            <option ng-repeat="group in groups" value="{{group._id}}">{{group.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row margin-top-20">
+                    <div class="col-md-12">
+                        <div class="collapse alert alert-warning fade in" id="groupCreateVoidNameGroupMessage">
+                            <button type="button" class="close" aria-label="Close" data-toggle="collapse"
+                                    data-target="#groupCreateVoidNameGroupMessage" aria-expanded="true">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            Пожалуйста, заполните <strong>имя</strong> группы.
+                        </div>
+                        <div class="collapse alert alert-warning fade in" id="groupCreateVoidParentGroupMessage">
+                            <button type="button" class="close" aria-label="Close" data-toggle="collapse"
+                                    data-target="#groupCreateVoidParentGroupMessage" aria-expanded="true">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            Пожалуйста, выберите <strong>родительскую группу</strong>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                <button ng-click="createNewGroup()" type="button" class="btn btn-primary" >Создать группу</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
