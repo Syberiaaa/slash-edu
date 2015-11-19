@@ -37,12 +37,14 @@ PagesControllers.controller('MaterialEditCtrl', ['$scope', '$http', '$location',
         };
 
         $scope.add = function () {
+
             $scope.src = $scope.editor.getValue();
 
             $http.put('/api/materials', {
-                name: $scope.name,
-                type: $scope.type,
-                src: $scope.src
+                name:  $scope.name,
+                type:  $scope.type,
+                src:   $scope.src
+
             }).then(function (response) {
                 $location.path('/materials');
             });

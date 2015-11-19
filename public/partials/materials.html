@@ -4,47 +4,76 @@
 </ol>
 
 
-
    <div class="row">
     <div class="col-md-4 ">
 
-            <form class="form-inline" role="form">
-        <input ng-model="name" type="text" class="form-control">
-            <button ng-click="createGroup()" class="btn btn-primary" type="button">Add</button>
-                </form>
 
-        <ul>
-            <li ng-click="printChildren()" ng-repeat="mg in materialGroups | filter: {parent: null}" >
+        <!--dl>
+            <dt ng-click="printChildren()" ng-repeat="mg in materialGroups | filter: {parent: null}" >
+                <div>
                 {{mg.name}}
-            </li>
-        </ul>
+                <a type="button" class="btn btn-xs btn-default" role="button" ng-click="deleteMaterialGroup(materialgroup._id)">delete</a>
+                </div>
+            </dt>
+        </dl-->
+
+        <table class='table table-striped table-bordered sorted_table'>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Type</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr  ng-click="clickOnGroup(mg._id)" class="simple_with_animation divider" data-toggle="collapse" data-target="#demo" ng-repeat="mg in materialGroups | filter: {parent: null}">
+
+                <td >{{$index + 1}}</td>
+                <td >{{mg.name}}</td>
+                <td style="width: 1px">
+                    <a type="button" class="btn btn-xs btn-default" role="button" ng-click="deleteMaterialGroup(mg)">delete</a>
+                </td>
+               </tr>
+
+            </tbody>
+        </table>
+
+        <form class="form-inline" role="form">
+            <input ng-model="name" type="text" class="form-control">
+            <button ng-click="createGroup()" class="btn btn-primary" type="button">Add</button>
+        </form>
+
 
     </div>
 
     <div class="col-md-8">
-        <table class="table table-striped">
+        <table class='table table-striped table-bordered sorted_table'>
             <thead>
-            <!--tr>
+            <tr>
+
                 <th>#</th>
                 <th>Name</th>
                 <th>Type</th>
                 <th></th>
-            </tr-->
+            </tr>
             </thead>
             <tbody>
             <tr ng-repeat="material in materials | limitTo:itemsPerPage:numberMaterial">
+
                 <td>{{$index + 1 + (currentPage * 3)}}</td>
                 <td>{{material.name}}</td>
                 <td>{{material.type}}</td>
                 <td>
                     <a type="button" class="btn btn-xs btn-default" role="button" ng-href="#/materials/{{material._id}}">edit</a>
-                    <a type="button" class="btn btn-xs btn-default" role="button" ng-click="deleteMaterial(material._id)">delete</a>
+                    <a type="button" class="btn btn-xs btn-default" role="button" ng-click="deleteMaterial(material)">delete</a>
                 </td>
+
             </tr>
             </tbody>
         </table>
 
-        <div><a href="#/materials/new" class="btn btn-primary" role="button">New Material</a></div>
+        <div><a href="#/materials/new" ng-click="newMaterial()" class="btn btn-primary " role="button">New Material</a></div>
         <ul class="pagination">
             <li><a ng-click="decCurrentPage()">&laquo;</a></li>
             <li ng-class="{active: currentPage == page}" ng-repeat="page in pages"><a >{{page + 1}}</a></li>
@@ -54,6 +83,11 @@
     </div>
 
    </div>
+
+
+
+
+
 
 
 
