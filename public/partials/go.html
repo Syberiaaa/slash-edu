@@ -2,3 +2,28 @@
     <li><a href="#/">Home</a></li>
     <li class="active">Go</li>
 </ol>
+
+<h2>User Courses</h2>
+
+<table class="table table-striped">
+    <thed>
+        <tr>
+            <th>#</th>
+            <th>User</th>
+            <th>Course</th>
+        </tr>
+    </thed>
+    <tbody>
+    <tr ng-repeat="course in userCourses">
+        <td>{{course._id}}</td>
+        <td>{{course.user}}</td>
+        <td>{{course.course}}</td>
+    </tr>
+    </tbody>
+</table>
+
+<ul class="pagination">
+    <li><a ng-click="decCurrentPage()">&laquo;</a></li>
+    <li ng-class="{active: currentPage == page}" ng-repeat="page in pages"><a >{{page + 1}}</a></li>
+    <li><a ng-click="incCurrentPage()">&raquo;</a></li>
+</ul>

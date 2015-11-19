@@ -7,6 +7,7 @@ slashEduApp.directive('seMenu', ['UserService', '$location',
         var user = UserSerivce.getUser();
         if (user.email) {
           $scope.email = user.email;
+          $scope._id   = user._id;
         }
 
         $scope.go = function(path) {
