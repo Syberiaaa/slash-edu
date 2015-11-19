@@ -3,7 +3,7 @@ var router = express.Router();
 var kramed = require('kramed');
 var db = require('../../db');
 var Materials = db.model('Materials');
-
+var groupId;
 router.post('/preview', function(req, res) {
   var html = kramed(req.body.src);
   res.send(html);
@@ -22,7 +22,8 @@ function createMaterialObject(req_body) {
 
 router.put('/', function(req, res) {
   var newMat = new Materials(createMaterialObject(req.body));
-
+    newMat.parent = groupId;
+    console.log("Privet "+newMat.parent)
   newMat.save(function(err) {
 
     if (err) res.sendStatus(400);
@@ -63,10 +64,14 @@ router.post('/:materialId', function(req, res) {
 });
 
 router.delete('/:materialId', function(req, res) {
-  Materials.findOneAndRemove(req.params.materialId, function(err) {
+  Materials.findByIdAndRemove(req.params.materialId, function(err) {
     res.sendStatus(200);
   });
 });
 
+router.put('/:groupId', function(req, res) {
+    groupId = req.body.groupId;
+
+});
 
 module.exports = router;
