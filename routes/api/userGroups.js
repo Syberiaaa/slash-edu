@@ -41,15 +41,6 @@ function buildGroupsTree (groups, group) {
 };
 
 router.put('/', function(req, res) {
-    /*var newUserGroups = new UserGroups({
-        name: req.body.name,
-        parent:  {
-            src: req.body.src,
-            html: kramed(req.body.src)
-        }
-
-    });
-    */
 
     var newUserGroup = new UserGroups({
         name: req.body.name,
