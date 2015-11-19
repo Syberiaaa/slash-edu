@@ -4,7 +4,7 @@ PagesControllers.controller('GoCtrl', ['$scope', '$http',
 
         $http.get('/api/userCourses')
             .then(function(res) {
-                $scope.userCourses = response.data;
+                $scope.userCourses = res.data;
             });
 
 
