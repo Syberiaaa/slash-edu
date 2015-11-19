@@ -17,7 +17,7 @@
             </dt>
         </dl-->
 
-        <table class='table table-striped table-bordered sorted_table'>
+        <table class="table table-bordered">
             <thead>
             <tr>
                 <th>#</th>
@@ -27,7 +27,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr  ng-click="clickOnGroup(mg._id)" class="simple_with_animation divider" data-toggle="collapse" data-target="#demo" ng-repeat="mg in materialGroups | filter: {parent: null}">
+            <tr  ng-click="clickOnGroup(mg._id)" ng-class="mg._id == groupId ? 'active' : ''" class="simple_with_animation divider" data-toggle="collapse" data-target="#demo" ng-repeat="mg in materialGroups | filter: {parent: null}">
 
                 <td >{{$index + 1}}</td>
                 <td >{{mg.name}}</td>

@@ -22,7 +22,7 @@ PagesControllers.controller('MaterialsCtrl', ['$scope', '$http',
         $scope.deleteMaterial = function(material) {
             var i = $scope.materials.indexOf(material)
             $scope.materials.splice(i,1)
-            $http.delete('/api/materials/'+material)
+            $http.delete('/api/materials/'+material._id)
                 .then(function(res) {
 
                 });
