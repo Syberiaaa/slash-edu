@@ -1,9 +1,9 @@
 PagesControllers.controller('CoursesCtrl', ['$scope', '$http',
     function($scope, $http) {
-        $scope.materials = [];
+        $scope.courses = [];
 
         $http.get('/api/courses', function(res) {
-            $scope.materials = res.data;
+            $scope.courses = res.data;
         });
     }
 ]);
