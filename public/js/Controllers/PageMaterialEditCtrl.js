@@ -61,6 +61,15 @@ PagesControllers.controller('MaterialEditCtrl', ['$scope', '$http', '$location',
             });
         };
 
+        $scope.del = function (){
+            $scope.src = $scope.editor.getValue();
+            $http.delete('/api/materials/'+$scope.materialId)
+                .then(function(response){
+                   $location.path('/materials');
+                });
+
+        };
+
         $('#myTab a').click(function (e) {
             e.preventDefault();
             $(this).tab('show');
