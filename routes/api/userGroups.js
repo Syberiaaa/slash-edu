@@ -3,8 +3,45 @@ var router = express.Router();
 var db = require('../../db');
 var UserGroups = db.model('UserGroups');
 
+function Group(name, parent, id) {
+    this.name = name;
+    this.parent = parent;
+    this._id = id;
+};
+
+function buildGroupsTree (groups, group) {
+    var buildGroups = [];
+
+    if( group != undefined ) {
+
+        groups.forEach(function (g) {
+            if (g.parent+"" == group._id) {
+                buildGroups.push(new Group(g.name, g.parent, g._id));
+            }
+        });
+
+        group.groups = buildGroups;
+        buildGroups.forEach(function (item) {
+            buildGroupsTree(groups, item)
+        });
+
+    } else {
+        var rootGroup;
+
+        groups.forEach(function (item) {
+
+            if(item.name == "root") {
+                rootGroup = new Group(item.name, item.parent, item._id);
+                buildGroupsTree(groups, rootGroup)
+            }
+        });
+
+        return rootGroup;
+    }
+};
+
 router.put('/', function(req, res) {
-    var newUserGroups = new UserGroups({
+    /*var newUserGroups = new UserGroups({
         name: req.body.name,
         parent:  {
             src: req.body.src,
@@ -12,9 +49,14 @@ router.put('/', function(req, res) {
         }
 
     });
+    */
 
-    newUserGroups.save(function(err) {
+    var newUserGroup = new UserGroups({
+        name: req.body.name,
+        parent: req.body.parent
+    });
 
+    newUserGroup.save(function(err) {
         if (err) res.sendStatus(400);
         else res.sendStatus(200);
     });
@@ -24,7 +66,11 @@ router.put('/', function(req, res) {
 
 router.get('/', function(req, res) {
     UserGroups.find({}, function(err, groups) {
-    res.send(groups);
+        var response = {};
+        var groupsTree = {};
+        response.groups = groups;
+        response.groupsTree = buildGroupsTree(groups);
+        res.send(response);
     });
 });
 
@@ -36,7 +82,7 @@ router.get('/:groupId', function(req, res) {
 router.post ('/:groupId', function(req, res){
     UserGroups.success(function (UserGroups) {
             console.log('UserGroups:', UserGroups);
-        })
+        });
     res.send(UserGroups);
 });
 

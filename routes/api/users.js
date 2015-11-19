@@ -5,10 +5,6 @@ var Users = db.model('Users');
 
 router.put('/', function(req, res) {
     //добавить юзерс
-
-    console.log(req.body.name);
-    console.log(req.body.password);
-    console.log(req.body.email);
     var user = new Users ({ name: req.body.name,
                             password: req.body.password,
                             email: req.body.email,
@@ -28,19 +24,34 @@ router.get('/', function(req, res) {
     });
 });
 
-router.get('/:email', function(req, res) {
-    // TODO issue #3
-    res.send('not implemented yet');
+router.get('/:userId', function(req, res) {
+    Users.findById(req.params.userId, function(err, user) {
+        if (err) {
+            console.error(err);
+        }
+        res.send(user);
+    });
 });
 
-router.post('/:email', function(req, res) {
-    // TODO issue #3
-    res.send('not implemented yet');
+router.post('/:userId', function(req, res) {
+    var updUser = {};
+    updUser.name = req.body.name;
+    updUser.email = req.body.email;
+    updUser.role = req.body.role;
+
+    if(req.body.password  === undefined) {}
+    else { updUser.password = req.body.password;}
+
+    Users.findOneAndUpdate({ _id: req.params.userId}, updUser, function (err) {});
+
 });
 
-router.delete('/:email', function(req, res) {
-    // TODO issue #3
-    res.send('not implemented yet');
+router.delete('/:userId', function(req, res) {
+    Users.remove({ _id: req.params.userId}, function (err) {
+        if(err) {
+            console.error(err);
+        }
+    });
 });
 
 module.exports = router;
