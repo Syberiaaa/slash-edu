@@ -7,6 +7,7 @@ router.get('/', function(req,res) {
     Courses.find(function(err, courses) {
         if (err) console.error(err);
         res.send(courses);
+
     });
 });
 

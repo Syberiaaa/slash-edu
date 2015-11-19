@@ -10,7 +10,12 @@ router.put('/', function(req, res) {
 
 router.get('/', function(req, res) {
     UserCourses.find(function(err, userCourses){
-        res.send(userCourses);
+       // res.send(userCourses);
+        res.send({
+            id: userCourses.id,
+            user: userCourses.user,
+            course: userCourses.course
+        });
     });
 });
 
