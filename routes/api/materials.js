@@ -34,7 +34,6 @@ router.put('/', function(req, res) {
 router.get('/', function(req,res) {
 
 
-
   Materials.find(function(err, materials){
 
     res.send(materials);
@@ -63,8 +62,8 @@ router.post('/:materialId', function(req, res) {
 
 });
 
-router.delete('/:materialId', function(req, res) {
-  Materials.findByIdAndRemove(req.params.materialId, function(err) {
+router.delete('/:material', function(req, res) {
+  Materials.findByIdAndRemove(req.params.material, function(err) {
     res.sendStatus(200);
   });
 });
