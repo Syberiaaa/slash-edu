@@ -17,13 +17,14 @@ router.put('/', function(req, res) {
 
 router.get('/', function(req, res) {
 
+    MaterialGroups.find(function(err, materialgroups){
+
+        res.send(materialgroups);
+    });
 });
 
 router.get('/:groupId', function(req, res) {
-    MaterialGroups.findById(req.params.materialGroupsID, function (err, material){
 
-    });
-    res.send('not implemented yet');
 });
 
 router.post('/:groupId', function(req, res) {
@@ -32,8 +33,10 @@ router.post('/:groupId', function(req, res) {
 });
 
 router.delete('/:groupId', function(req, res) {
-    // TODO issue #10
-    res.send('not implemented yet');
+
+    MaterialGroups.findByIdAndRemove(req.params.groupId, function(err) {
+        res.sendStatus(200);
+    });
 });
 
 module.exports = router;
