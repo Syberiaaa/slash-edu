@@ -51,7 +51,7 @@ PagesControllers.controller('MaterialsCtrl', ['$scope', '$http',
                  updateMaterialGroups();
              });
         }
-        $scope.printChildrens = function()
+        $scope.printChildren = function()
         {
             $http.get('/api/materials', {id: $scope.materialGroupsID})
                 .then(function(response) {

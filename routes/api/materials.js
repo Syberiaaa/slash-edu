@@ -41,7 +41,6 @@ router.get('/', function(req,res) {
 router.get('/:materialId', function(req, res) {
 
   Materials.findById(req.params.materialId, function (err, material){
-    if(err) returnError(err);
     material.save(function(err){
       if(err) return andleError(err);
       res.send({
@@ -56,14 +55,13 @@ router.get('/:materialId', function(req, res) {
 router.post('/:materialId', function(req, res) {
 
   Materials.findByIdAndUpdate(req.params.materialId, { $set: createMaterialObject(req.body)}, function (err, material) {
-    if (err) return handleError(err);
     res.send(material);
   });
 
 });
 
 router.delete('/:materialId', function(req, res) {
-  Materials.findOneAndRemove(req.params.materialId, function(err) {
+  Materials.findByIdAndRemove(req.params.materialId, function(err) {
     res.sendStatus(200);
   });
 });

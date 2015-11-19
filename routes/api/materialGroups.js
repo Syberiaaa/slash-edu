@@ -16,13 +16,13 @@ router.put('/', function(req, res) {
 });
 
 router.get('/', function(req, res) {
-    MaterialGroups.find(function(err, materialGroups){
-        res.send(materialGroups);
-    });
+
 });
 
 router.get('/:groupId', function(req, res) {
-    // TODO issue #10
+    MaterialGroups.findById(req.params.materialGroupsID, function (err, material){
+
+    });
     res.send('not implemented yet');
 });
 
