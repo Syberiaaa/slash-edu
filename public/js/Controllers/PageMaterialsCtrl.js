@@ -19,10 +19,22 @@ PagesControllers.controller('MaterialsCtrl', ['$scope', '$http',
                 $scope.currentPage--; $scope.numberMaterial-=$scope.itemsPerPage;}
         };
 
-        $scope.deleteMaterial = function(materialId,i) {
-            $http.delete('/api/materials/'+materialId)
+        $scope.deleteMaterial = function(material) {
+            var i = $scope.materials.indexOf(material)
+            $scope.materials.splice(i,1)
+            $http.delete('/api/materials/'+material)
                 .then(function(res) {
-                        $scope.materials.splice(i,1);
+
+                });
+        };
+
+
+        $scope.deleteMaterialGroup = function(group) {
+            var i = $scope.materialGroups.indexOf(group)
+            $scope.materialGroups.splice(i,1)
+            $http.delete('/api/materialGroups/'+group._id)
+                .then(function(res) {
+
                 });
         };
 
@@ -51,12 +63,25 @@ PagesControllers.controller('MaterialsCtrl', ['$scope', '$http',
                  updateMaterialGroups();
              });
         }
-        $scope.printChildrens = function()
+        $scope.clickOnGroup = function(groupId)
         {
-            $http.get('/api/materials', {id: $scope.materialGroupsID})
+            $http.get('/api/materials?materialGroupID=' + groupId)
                 .then(function(response) {
-                    $scope.materialGroups = response.data;
-                });
+                    $scope.materials = response.data;
+                }
+            )
+            console.log("clickOnGroup "+groupId)
+            $scope.groupId=groupId;
+        }
+
+        $scope.newMaterial = function()
+        {
+            $http.put('/api/materials/groupId', {
+              groupId: $scope.groupId
+            }).then(function() {
+
+            });
+            console.log("newMaterial "+$scope.groupId)
         }
     }
 ]);
