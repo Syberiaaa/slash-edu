@@ -3,6 +3,8 @@ var router = express.Router();
 var kramed = require('kramed');
 var db = require('../../db');
 var Materials = db.model('Materials');
+
+var ObjectId = db.Types.ObjectId;
 var groupId;
 router.post('/preview', function(req, res) {
   var html = kramed(req.body.src);
@@ -31,10 +33,15 @@ router.put('/', function(req, res) {
   });
 });
 
-router.get('/', function(req,res) {
+router.get('/', function(req, res) {
+
+  var query = {};
+  if (req.query.materialGroupID) {
+    query.parent = new ObjectId(req.query.materialGroupID);
+  }
 
 
-  Materials.find(function(err, materials){
+  Materials.find(query, function(err, materials){
 
     res.send(materials);
  });
