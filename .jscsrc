@@ -1,0 +1,15 @@
+{
+  "preset": "node-style-guide",
+  "requireTrailingComma": false,
+  "requireSemicolons": true,
+  "validateParameterSeparator": ", ",
+  "disallowMultipleLineBreaks": true,
+  "disallowNewlineBeforeBlockStatements": true,
+  "requireSpacesInForStatement": true,
+  "disallowPaddingNewlinesInBlocks": { "allExcept": [ "conditionals" ] },
+  "disallowYodaConditions": true,
+  "requireAlignedMultilineParams": "firstParam",
+  "requireLineBreakAfterVariableAssignment": true,
+  "requireSpacesInConditionalExpression": true,
+  "excludeFiles": ["node_modules/**", "public/ace/**", "public/highlight/**"]
+}
