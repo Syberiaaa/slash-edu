@@ -1,52 +1,53 @@
 PagesControllers.controller('UsersCtrl', ['$scope', '$http',
   function($scope, $http) {
-
     function getBranchFromGroupsTree(groupId, groupsTree, array) {
       array.push(groupsTree._id);
-      if( groupsTree._id == groupId ) {
+      if (groupsTree._id == groupId) {
         return true;
       }
 
-      for( var i = 0; i < groupsTree.groups.length; i++ ) {
-        if( getBranchFromGroupsTree(groupId, groupsTree.groups[i], array) ) { return true; }
+      for (var i = 0; i < groupsTree.groups.length; i++) {
+        if (getBranchFromGroupsTree(groupId, groupsTree.groups[i], array)) {
+          return true;
+        }
       }
       array.pop();
       return false;
-    };
+    }
 
     function getUsersData() {
-      $http.get('/api/users').then(function(res){
+      $http.get('/api/users').then(function(res) {
         $scope.users = res.data;
         $scope.allUsers = res.data;
       });
     }
 
     function getGroupsData() {
-      $http.get("/api/userGroups").then(
-          function ( response ) {
-            $scope.groups = response.data.groups;
-            $scope.groupsTree = response.data.groupsTree;
-          }
+      $http.get('/api/userGroups').then(
+        function(response) {
+          $scope.groups = response.data.groups;
+          $scope.groupsTree = response.data.groupsTree;
+        }
       );
     }
 
     $scope.users = [];
     $scope.groups = [];
-    $scope.allUsers  = [];
-    $scope.groupsTree;
-    $scope.userGroupFilter = "all groups";
-    $scope.userNameFilter;
-    $scope.nameOfNewGroup = "";
+    $scope.allUsers = [];
+    $scope.groupsTree = null;
+    $scope.userGroupFilter = 'all groups';
+    $scope.userNameFilter = null;
+    $scope.nameOfNewGroup = '';
     $scope.parentOfNewGroup = undefined;
-    $scope.createNewGroup;
+    $scope.createNewGroup = null;
 
-    //$scope.userGroupFilter = "all groups";
+    // TODO: $scope.userGroupFilter = 'all groups';
 
-    $scope.findUserFilter = function(event) {
+    $scope.findUserFilter = function() {
       var nameFilter = $scope.userNameFilter;
       var groupFilter = $scope.userGroupFilter;
 
-      if(nameFilter == "") {
+      if (nameFilter == '') {
         newUsers = $scope.allUsers;
       } else {
         var newUsers = [];
@@ -57,12 +58,12 @@ PagesControllers.controller('UsersCtrl', ['$scope', '$http',
           }
         }
       }
-      if( groupFilter != "all groups") {
-        newUsers = newUsers.filter(function (item) {
+      if (groupFilter != 'all groups') {
+        newUsers = newUsers.filter(function(item) {
           var userGroups = [];
           var flag = false;
           getBranchFromGroupsTree(item.groupId, $scope.groupsTree, userGroups);
-          userGroups.forEach(function (id) {
+          userGroups.forEach(function(id) {
             if (id == groupFilter) {
               flag = true;
             }
@@ -72,42 +73,45 @@ PagesControllers.controller('UsersCtrl', ['$scope', '$http',
       }
       $scope.users = newUsers;
     };
+
     $('#groupCreateVoidNameGroupMessage').collapse({
       toggle: true
     });
     $('#groupCreateVoidParentGroupMessage').collapse({
       toggle: true
     });
-    $scope.createNewGroup = function () {
-      var voidNameMessage = $("#groupCreateVoidNameGroupMessage");
-      var voidParentMessage = $("#groupCreateVoidParentGroupMessage");
-      //voidNameMessage.collapse();
-      //voidParentMessage.collapse({toggle: true});
+
+    $scope.createNewGroup = function() {
+      var voidNameMessage = $('#groupCreateVoidNameGroupMessage');
+      var voidParentMessage = $('#groupCreateVoidParentGroupMessage');
+      // TODO: voidNameMessage.collapse();
+      // TODO: voidParentMessage.collapse({toggle: true});
 
       var validate = true;
-      if($scope.parentOfNewGroup == undefined) {
+      if ($scope.parentOfNewGroup == undefined) {
         validate = false;
-        voidParentMessage.collapse("show");
-      } else { voidParentMessage.collapse("hide"); }
-      if( $scope.nameOfNewGroup == "" ) {
+        voidParentMessage.collapse('show');
+      } else {
+        voidParentMessage.collapse('hide');
+      }
+      if ($scope.nameOfNewGroup == '') {
         validate = false;
-        voidNameMessage.collapse("show");
-      } else { voidNameMessage.collapse("hide"); }
-      if(validate) {
+        voidNameMessage.collapse('show');
+      } else {
+        voidNameMessage.collapse('hide');
+      }
+      if (validate) {
         var newGroup = {};
         newGroup.name = $scope.nameOfNewGroup;
         newGroup.parent = $scope.parentOfNewGroup;
-        $http.put('/api/userGroups', newGroup).success(function (data, status) {
-              getGroupsData();
-              $("#createNewGroupDialogModal").modal('hide');
-            }
-        ).error(function (data, status) {
-              console.err("Error in group create request" + status);
-              $("#createNewGroupDialogModal").modal('hide');
-            }
-        );
+        $http.put('/api/userGroups', newGroup).success(function() {
+          getGroupsData();
+          $('#createNewGroupDialogModal').modal('hide');
+        }).error(function(data, status) {
+          console.err('Error in group create request' + status);
+          $('#createNewGroupDialogModal').modal('hide');
+        });
       }
-
     };
 
     getUsersData();
@@ -115,11 +119,9 @@ PagesControllers.controller('UsersCtrl', ['$scope', '$http',
 
     // Where to use this code? -------------------
     $scope.user = function() {
-      $http.put('/api/users', {
-      }).then(function(response) {
-        $location.path('/users/'+user._id);
+      $http.put('/api/users', {}).then(function() {
+        $location.path('/users/' + user._id);
       });
-    }
-    //---------------------------------------------
+    };
   }
-])
+]);

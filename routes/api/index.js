@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../../db');
-var Users = db.model("Users");
-var Utils = require("../../utils/Utils.js");
+var Users = db.model('Users');
+// TODO: var Utils = require('../../utils/Utils.js');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
   res.send('This is an /edu RESTful API.');
 });
 

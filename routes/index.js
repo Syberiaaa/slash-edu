@@ -6,21 +6,20 @@ var passport = require('passport');
 router.use('/api', api);
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
   res.redirect('/index.html');
 });
 
-/* passport routes */
+/* Passport routes */
 router.post('/login',
   passport.authenticate('local', { failureRedirect: '/#login' }),
   function(req, res) {
     res.redirect('/');
   });
 
-router.get('/logout',
-  function(req, res){
-    req.logout();
-    res.redirect('/');
-  });
+router.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/');
+});
 
 module.exports = router;

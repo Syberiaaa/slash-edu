@@ -6,52 +6,55 @@ var Materials = db.model('Materials');
 
 var ObjectId = db.Types.ObjectId;
 var groupId;
+
 router.post('/preview', function(req, res) {
   var html = kramed(req.body.src);
   res.send(html);
 });
 
-function createMaterialObject(req_body) {
+function createMaterialObject(reqBody) {
   return {
-    name: req_body.name,
-    type: req_body.type,
+    name: reqBody.name,
+    type: reqBody.type,
     data: {
-      src: req_body.src,
-      html: kramed(req_body.src)
+      src: reqBody.src,
+      html: kramed(reqBody.src)
     }
   };
 }
 
 router.put('/', function(req, res) {
   var newMat = new Materials(createMaterialObject(req.body));
-    newMat.parent = groupId;
-    console.log("Privet "+newMat.parent)
-  newMat.save(function(err) {
+  newMat.parent = groupId;
+  console.log('Privet ' + newMat.parent);
 
-    if (err) res.sendStatus(400);
-    else res.sendStatus(200);
+  newMat.save(function(err) {
+    if (err) {
+      res.sendStatus(400);
+    } else {
+      res.sendStatus(200);
+    }
   });
 });
 
 router.get('/', function(req, res) {
-
   var query = {};
   if (req.query.materialGroupID) {
     query.parent = new ObjectId(req.query.materialGroupID);
   }
 
-
-  Materials.find(query, function(err, materials){
-
+  Materials.find(query, function(err, materials) {
     res.send(materials);
- });
+  });
 });
 
 router.get('/:materialId', function(req, res) {
+  Materials.findById(req.params.materialId, function(err, material) {
+    material.save(function(err) {
+      if (err) {
+        return andleError(err);
+      }
 
-  Materials.findById(req.params.materialId, function (err, material){
-    material.save(function(err){
-      if(err) return andleError(err);
       res.send({
         data: material.data,
         name: material.name,
@@ -62,22 +65,28 @@ router.get('/:materialId', function(req, res) {
 });
 
 router.post('/:materialId', function(req, res) {
-
-  Materials.findByIdAndUpdate(req.params.materialId, { $set: createMaterialObject(req.body)}, function (err, material) {
-    res.send(material);
-  });
-
+  Materials.findByIdAndUpdate(
+    req.params.materialId,
+    {$set: createMaterialObject(req.body)},
+    function(err, material) {
+      res.send(material);
+    }
+  );
 });
 
 router.delete('/:material', function(req, res) {
   Materials.findByIdAndRemove(req.params.material, function(err) {
-    res.sendStatus(200);
+    if (err) {
+      res.sendStatus(400);
+    } else {
+      res.sendStatus(200);
+    }
   });
 });
 
 router.put('/:groupId', function(req, res) {
-    groupId = req.body.groupId;
-
+  groupId = req.body.groupId;
+  res.sendStatus(200);
 });
 
 module.exports = router;

@@ -1,9 +1,9 @@
 slashEduApp.directive('seMenu', ['UserService', '$location',
   function(UserSerivce, $location) {
     return {
-      templateUrl : 'partials/menu.html',
-      controllerAs : 'ctrl',
-      controller : ['$scope', function($scope) {
+      templateUrl: 'partials/menu.html',
+      controllerAs: 'ctrl',
+      controller: ['$scope', function($scope) {
         var user = UserSerivce.getUser();
         if (user.email) {
           $scope.email = user.email;
@@ -17,6 +17,6 @@ slashEduApp.directive('seMenu', ['UserService', '$location',
           $location.url(path);
         };
       }]
-    }
+    };
   }
 ]);

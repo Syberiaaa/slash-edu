@@ -1,5 +1,5 @@
 var passwordHash = require('password-hash');
-var Utils = require("../utils/Utils.js");
+var Utils = require('../utils/Utils.js');
 
 module.exports = function(mongoose) {
   var  Schema = mongoose.Schema;
@@ -18,22 +18,29 @@ module.exports = function(mongoose) {
     return Utils.getUserRights(this.role);
   });
 
-  usersSchema.pre('save', function (next) {
-    if (!passwordHash.isHashed(this.password)) {
-      this.password = passwordHash.generate(this.password);
+  usersSchema.pre('save', function(next) {
+    var that = this;
+    if (!passwordHash.isHashed(that.password)) {
+      that.password = passwordHash.generate(that.password);
     }
     next();
   });
 
   var Users = mongoose.model('Users', usersSchema);
- /*
-  Users.count({}, function(err, cnt) {
-    if (cnt === 0) {
-      var admin = new Users({name: "admin", email: 'admin@isu.ru', password: '123456', role: "admin"});
-      admin.save(function(err) {
-        if (err) console.error(err);
-      });
-    }
-  });
- */
+
+  /* TODO:
+    Users.count({}, function(err, cnt) {
+      if (cnt === 0) {
+        var admin = new Users({
+          name: "admin",
+          email: 'admin@isu.ru',
+          password: '123456',
+          role: 'admin'
+        });
+        admin.save(function(err) {
+          if (err) console.error(err);
+        });
+      }
+    });
+  */
 };
