@@ -1,3 +1,16 @@
+<style type="text/css">
+    #editor {
+        height: 300pt;
+    }
+
+    #preview {
+        background-color: #fcfcfc;
+        border: thin solid #eeeeee;
+        height: 300pt;
+        overflow-y: scroll;
+    }
+</style>
+
 <ol class="breadcrumb">
     <li><a href="#/">Home</a></li>
     <li><a href="#/materials">Materials</a></li>
@@ -6,44 +19,51 @@
 
 <h1>New(Edit) Material</h1>
 
-<form role="form"><br>
+<form role="form" class="form-horizontal">
     <div class="form-group">
-        <input ng-model="name" type="text" class="form-control" placeholder="Name of material">
+        <label for="materialName" class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-10">
+            <input ng-model="name" type="text" class="form-control" placeholder="Name of material" id="materialName">
+        </div>
     </div>
     <div class="form-group">
-        <select ng-model="type" class="form-control input-sm">
-            <option value="text">Text material</option>
-        </select>
+        <label for="materialType" class="col-sm-2 control-label">Type</label>
+        <div class="col-sm-10">
+            <select ng-model="type" class="form-control input-sm" id="materialType">
+                <option value="text">Text material</option>
+            </select>
+        </div>
     </div>
-    <div class="bs-example bs-example-tabs">
-        <ul id="myTab" class="nav nav-tabs">
-            <li class="active"><a href="#home" data-toggle="tab">Edit</a></li>
-            <li><a href="#profile" data-toggle="tab" ng-click="preview()">Preview</a></li>
-        </ul>
-        <div id="myTabContent" class="tab-content">
-            <div class="tab-pane fade in active" id="home">
-                <div id="editor" ng-model="src"></div>
-                <style type="text/css">
-                    #editor {
-                        height: 150px;
-                    }
-                </style>
-            </div>
-            <div class="tab-pane fade" id="profile">
-                <div ng-bind-html="html"></div>
+    <div class="form-group">
+        <label for="materialType" class="col-sm-2 control-label">Text material</label>
+        <div class="bs-example bs-example-tabs col-sm-10">
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active"><a href="#home" data-toggle="tab">Edit</a></li>
+                <li><a href="#profile" data-toggle="tab" ng-click="preview()">Preview</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade in active" id="home">
+                    <div id="editor" ng-model="src"></div>
+                </div>
+                <div class="tab-pane fade" id="profile">
+                    <div id="preview" ng-bind-html="html"></div>
+                </div>
             </div>
         </div>
-    </div><!-- /example -->
+    </div>
 
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button ng-click="add()" type="button" class="btn btn-primary" ng-show="materialId == 'new'">
+                <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Add
+            </button>
+            <button ng-click="update()" type="button" class="btn btn-primary" ng-hide="materialId == 'new'">
+                <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save
+            </button>
+            <button ng-click="del()" type="button" class="btn btn-danger" ng-hide="materialId == 'new'">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+            </button>
+        </div>
+    </div>
 
-    <button ng-click="add()" type="button" class="btn btn-primary" ng-show="materialId == 'new'">
-        <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Add
-    </button>
-    <button ng-click="update()" type="button" class="btn btn-primary" ng-hide="materialId == 'new'">
-        <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save
-    </button>
-    <button ng-click="del()" type="button" class="btn btn-danger" ng-hide="materialId == 'new'">
-        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
-    </button>
 </form>
-
