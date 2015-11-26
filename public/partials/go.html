@@ -3,18 +3,18 @@
     <li class="active">Go</li>
 </ol>
 
-<h2>User Courses</h2>
+<h1>User Courses</h1>
 
 <table class="table table-striped">
     <thed>
         <tr>
             <!--  <th>#</th>-->
-             <th>User</th>
-             <th>Course</th>
-         </tr>
-     </thed>
-     <tbody>
-     <tr ng-repeat="course in userCourses">
+            <th>User</th>
+            <th>Course</th>
+        </tr>
+    </thed>
+    <tbody>
+    <tr ng-repeat="course in userCourses">
         <!--<td>{{course._id}}</td>-->
         <td>{{course.user.name}}</td>
         <td>{{course.course.name}}</td>
@@ -22,9 +22,9 @@
     </tbody>
 </table>
 <div>
-<ul class="pagination">
-    <li><a ng-click="decCurrentPage()">&laquo;</a></li>
-    <li ng-class="{active: currentPage == page}" ng-repeat="page in pages"><a >{{page + 1}}</a></li>
-    <li><a ng-click="incCurrentPage()">&raquo;</a></li>
-</ul>
-    </div>>
+    <ul class="pagination">
+        <li><a ng-click="decCurrentPage()">&laquo;</a></li>
+        <li ng-class="{active: currentPage == page}" ng-repeat="page in pages"><a>{{page + 1}}</a></li>
+        <li><a ng-click="incCurrentPage()">&raquo;</a></li>
+    </ul>
+</div>

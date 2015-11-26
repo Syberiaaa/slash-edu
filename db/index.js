@@ -7,6 +7,5 @@ require('./MaterialGroups.js')(mongoose);
 require('./Materials.js')(mongoose);
 require('./Courses.js')(mongoose);
 require('./UserCourses.js')(mongoose);
-// TODO: require('../utils/DataBasePrepareScript.js')(mongoose);
 
 module.exports = mongoose;

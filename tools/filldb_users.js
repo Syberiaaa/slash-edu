@@ -1,5 +1,10 @@
-var Promise = require('./promise.js');
-module.exports = function(mongoose) {
+var Promise = require('./../utils/promise.js');
+
+var mongoose = require('./../db/index.js');
+var Groups = mongoose.model('UserGroups');
+var Users = mongoose.model('Users');
+
+function filldbUsers() {
   function saveAll(array, callback, callbackErrors) {
     var promises = [];
     for (var i = 0; i < array.length; i++) {
@@ -8,8 +13,6 @@ module.exports = function(mongoose) {
     Promise.all(promises).then(callback, callbackErrors);
   }
 
-  var Groups = mongoose.model('UserGroups');
-  var Users = mongoose.model('Users');
   var group;
 
   var prepareClear = [
@@ -189,6 +192,7 @@ module.exports = function(mongoose) {
             })
           ];
           saveAll(addUsers, function(res3) {
+            mongoose.disconnect();
           }, function(err) {
             if (err) {
               console.log(err);
@@ -208,4 +212,8 @@ module.exports = function(mongoose) {
   }, function(err) {
     console.log(err);
   });
-};
+}
+
+filldbUsers();
+
+module.exports = filldbUsers;
