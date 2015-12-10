@@ -2,10 +2,10 @@ var express = require('express');
 var router = express.Router();
 var db = require('../../db');
 var Courses = db.model('Courses');
+var Materials = db.model('Materials');
 
 router.get('/', function(req, res) {
   Courses.find(function(err, courses) {
-    console.log(courses);
     if (err) {
       console.error(err);
     } else {
@@ -15,19 +15,14 @@ router.get('/', function(req, res) {
 });
 
 router.get('/:courseId', function(req, res) {
-  Courses.findById(req.params.courseId, function(err,course) {
-    course.save(function(err) {
+  Courses.findById(req.params.courseId)
+    .populate('materials')
+    .exec(function(err, course) {
       if (err) {
-        return andleError(err);
+        console.error(err);
       }
-
-      res.send({
-        data: course.data,
-        name: course.name,
-        author: course.author
-      });
+      res.send(course);
     });
-  });
 });
 
 router.delete('/:courseId', function(req, res) {
@@ -40,6 +35,8 @@ router.delete('/:courseId', function(req, res) {
   });
 });
 
+
+
 router.post('/:courseId', function(req, res) { });
 
 function createCourseObject(reqBody) {
@@ -50,7 +47,6 @@ function createCourseObject(reqBody) {
     instructors: []
   };
 }
-
 
 router.put('/', function(req, res) {
   var newCour = new Courses(createCourseObject(req.body));
