@@ -16,6 +16,7 @@ PagesControllers.controller('MaterialEditCtrl',
           $scope.src = res.data.data.src;
           $scope.editor.setValue($scope.src);
         });
+
     }
 
     $scope.preview = function() {
