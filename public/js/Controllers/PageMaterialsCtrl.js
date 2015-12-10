@@ -66,13 +66,19 @@ PagesControllers.controller('MaterialsCtrl', ['$scope', '$http',
       });
     };
 
+
     $scope.clickOnGroup = function(groupId) {
+     if (groupId){
       $http.get('/api/materials?materialGroupID=' + groupId)
         .then(function(response) {
           $scope.materials = response.data;
         });
       console.log('clickOnGroup ' + groupId);
       $scope.groupId = groupId;
+    }else $http.get('/api/materials').then(function(response) {
+       $scope.materials = response.data;
+     })
+
     };
 
     $scope.newMaterial = function() {
