@@ -26,15 +26,16 @@ function createMaterialObject(reqBody) {
 router.put('/', function(req, res) {
   var newMat = new Materials(createMaterialObject(req.body));
   newMat.parent = groupId;
-  console.log('Privet ' + newMat.parent);
 
+  /*if (groupId==undefined)
+    newMat.parent =
   newMat.save(function(err) {
     if (err) {
       res.sendStatus(400);
     } else {
       res.sendStatus(200);
     }
-  });
+  });*/
 });
 
 router.get('/', function(req, res) {
