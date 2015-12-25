@@ -67,11 +67,10 @@
                     <a type="button" class="btn btn-xs btn-warning" role="button" ng-href="#/materials/{{material._id}}">
                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                     </a>
-                    <a type="button" class="btn btn-danger btn-xs" ng-click="deleteMaterial(material)">
+                    <a type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target=".bs-example-modal-lg">
                         <span class="glyphicon glyphicon-retweet" aria-hidden="true"></span>
                     </a>
-                    <a
-                     type="button" class="btn btn-danger btn-xs" ">
+                    <a type="button" class="btn btn-danger btn-xs" ng-click="deleteMaterial(material)" >
                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                     </a>
 
@@ -93,6 +92,33 @@
 
 </div>
 
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content"  >
+           <div >
+               <table class="table table-bordered">
+                   <thead>
+                   <tr>
+
+                       <th>Name</th>
+                   </tr>
+                   </thead>
+                   <tbody>
+
+                   <tr ng-click="clickOnModalGroup(mg._id)" ng-class="mg._id == groupId ? 'active' : ''"
+                       class="simple_with_animation divider" data-toggle="collapse" data-target="#demo"
+                       ng-repeat="mg in materialGroups">
+
+                       <td>{{mg.name}}</td>
+                   </tr>
+
+                   </tbody>
+               </table>
+               </div>
+        </div>
+    </div>
+</div>
 
 
 

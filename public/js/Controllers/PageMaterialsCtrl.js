@@ -54,7 +54,7 @@ PagesControllers.controller('MaterialsCtrl', ['$scope', '$http',
       $http.get('/api/materialGroups')
         .then(function(response) {
           $scope.materialGroups = response.data;
-          $scope.materialGroups.unshift({_id: undefined, name: 'root',parent:null})
+          $scope.materialGroups.unshift({_id: null, name: 'root',parent:null})
         });
     }
 
@@ -71,17 +71,17 @@ PagesControllers.controller('MaterialsCtrl', ['$scope', '$http',
 
 
     $scope.clickOnGroup = function(groupId) {
-     if (groupId){
       $http.get('/api/materials?materialGroupID=' + groupId)
         .then(function(response) {
           $scope.materials = response.data;
         });
       console.log('clickOnGroup ' + groupId);
       $scope.groupId = groupId;
-    }else $http.get('/api/materials').then(function(response) {
-       $scope.materials = response.data;
-     })
+    };
 
+
+    $scope.clickOnModalGroup = function(groupId) {
+      console.log("Modal window "+ groupId)
     };
 
     $scope.newMaterial = function() {

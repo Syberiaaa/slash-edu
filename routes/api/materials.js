@@ -26,7 +26,7 @@ function createMaterialObject(reqBody) {
 router.put('/', function(req, res) {
   var newMat = new Materials(createMaterialObject(req.body));
   newMat.parent = groupId;
-
+  console.log("GroupId = "+groupId)
 
   newMat.save(function(err) {
     if (err) {
@@ -40,12 +40,17 @@ router.put('/', function(req, res) {
 router.get('/', function(req, res) {
   var query = {};
   if (req.query.materialGroupID) {
+    if (req.query.materialGroupID=='null'){
+      query.parent=null
+    }
+    else
     query.parent = new ObjectId(req.query.materialGroupID);
   }
 
   Materials.find(query, function(err, materials) {
     res.send(materials);
   });
+
 });
 
 router.get('/:materialId', function(req, res) {
