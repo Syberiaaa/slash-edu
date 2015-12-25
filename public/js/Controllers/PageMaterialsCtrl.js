@@ -41,8 +41,8 @@ PagesControllers.controller('MaterialsCtrl', ['$scope', '$http',
     };
 
     $http.get('/api/materials')
-      .then(function(response) {
-        $scope.materials = response.data;
+          .then(function(response) {
+            $scope.materials = response.data;
         $scope.pages = [];
         var pagesNumber = $scope.materials.length / $scope.itemsPerPage;
         for (var i = 0; i < pagesNumber; i++) {
