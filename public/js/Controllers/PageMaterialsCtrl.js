@@ -8,6 +8,8 @@ PagesControllers.controller('MaterialsCtrl', ['$scope', '$http',
     $scope.materialGroups = [];
     $scope.name = '';
 
+
+
     $scope.setCurrentPage = function(val) {
       $scope.currentPage = val;
     };
@@ -52,6 +54,7 @@ PagesControllers.controller('MaterialsCtrl', ['$scope', '$http',
       $http.get('/api/materialGroups')
         .then(function(response) {
           $scope.materialGroups = response.data;
+          $scope.materialGroups.unshift({_id: undefined, name: 'root',parent:null})
         });
     }
 
