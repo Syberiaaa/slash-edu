@@ -8,6 +8,8 @@ PagesControllers.controller('MaterialsCtrl', ['$scope', '$http',
     $scope.materialGroups = [];
     $scope.name = '';
 
+
+
     $scope.setCurrentPage = function(val) {
       $scope.currentPage = val;
     };
@@ -39,8 +41,8 @@ PagesControllers.controller('MaterialsCtrl', ['$scope', '$http',
     };
 
     $http.get('/api/materials')
-      .then(function(response) {
-        $scope.materials = response.data;
+          .then(function(response) {
+            $scope.materials = response.data;
         $scope.pages = [];
         var pagesNumber = $scope.materials.length / $scope.itemsPerPage;
         for (var i = 0; i < pagesNumber; i++) {
@@ -52,6 +54,7 @@ PagesControllers.controller('MaterialsCtrl', ['$scope', '$http',
       $http.get('/api/materialGroups')
         .then(function(response) {
           $scope.materialGroups = response.data;
+          $scope.materialGroups.unshift({_id: undefined, name: 'root',parent:null})
         });
     }
 
@@ -66,13 +69,19 @@ PagesControllers.controller('MaterialsCtrl', ['$scope', '$http',
       });
     };
 
+
     $scope.clickOnGroup = function(groupId) {
+     if (groupId){
       $http.get('/api/materials?materialGroupID=' + groupId)
         .then(function(response) {
           $scope.materials = response.data;
         });
       console.log('clickOnGroup ' + groupId);
       $scope.groupId = groupId;
+    }else $http.get('/api/materials').then(function(response) {
+       $scope.materials = response.data;
+     })
+
     };
 
     $scope.newMaterial = function() {
