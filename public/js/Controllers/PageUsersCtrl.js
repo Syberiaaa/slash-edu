@@ -82,8 +82,8 @@ PagesControllers.controller('UsersCtrl', ['$scope', '$http',
     });
 
     $scope.deleteUserGroups = function(group) {
-      var i = $scope.UserGroups.indexOf(group);
-      $scope.UserGroups.splice(i, 1);
+      var i = $scope.groups.indexOf(group);
+      $scope.groups.splice(i, 1);
       $http.delete('/api/UserGroups/' + group._id);
     };
 

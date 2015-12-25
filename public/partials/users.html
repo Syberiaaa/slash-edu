@@ -66,8 +66,8 @@
                     </tr>
                     </thead>
                     <tr ng-repeat="group in groups">
-                        <td style="width: 1px;">
-                            <a type="button" class="btn btn-xs btn-danger" role="button" ng-click="deleteuserGroup(mg)">
+                        <td style="width: 1px;" >
+                            <a type="button" class="btn btn-xs btn-danger" role="button" ng-click="deleteUserGroups(group)" >
                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                         </a></td>
                         <td>{{group.name}}</td>
