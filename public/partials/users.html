@@ -59,26 +59,32 @@
                 <table class="table table-striped">
                     <thead>
                     <tr>
+                        <th></th>
                         <th>Group</th>
-                        <th>ID</th>
+
+                        <!--  <th>ID</th> -->
                     </tr>
                     </thead>
                     <tr ng-repeat="group in groups">
+                        <td style="width: 1px;">
+                            <a type="button" class="btn btn-xs btn-danger" role="button" ng-click="deleteuserGroup(mg)">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </a></td>
                         <td>{{group.name}}</td>
-                        <td>{{group._id}}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-<ul class="pagination">
-    <li><a ng-click="decCurrentPage()">&laquo;</a></li>
-    <li ng-class="{active: currentPage == page}" ng-repeat="page in pages"><a>{{page + 1}}</a></li>
-    <li><a ng-click="incCurrentPage()">&raquo;</a></li>
-</ul>
+                        <!-- <td>{{group._id}}</td>-->
+                     </tr>
+                 </table>
+             </div>
+         </div>
+     </div>
+ </div>
+ <ul class="pagination">
+     <li><a ng-click="decCurrentPage()">&laquo;</a></li>
+     <li ng-class="{active: currentPage == page}" ng-repeat="page in pages"><a>{{page + 1}}</a></li>
+     <li><a ng-click="incCurrentPage()">&raquo;</a></li>
+ </ul>
 
-<!-- Dialog box to create  a new group-->
+ <!-- Dialog box to create  a new group-->
 <div class="modal fade" id="createNewGroupDialogModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">

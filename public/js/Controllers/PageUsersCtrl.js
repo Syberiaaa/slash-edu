@@ -81,6 +81,12 @@ PagesControllers.controller('UsersCtrl', ['$scope', '$http',
       toggle: true
     });
 
+    $scope.deleteUserGroups = function(group) {
+      var i = $scope.UserGroups.indexOf(group);
+      $scope.UserGroups.splice(i, 1);
+      $http.delete('/api/UserGroups/' + group._id);
+    };
+
     $scope.createNewGroup = function() {
       var voidNameMessage = $('#groupCreateVoidNameGroupMessage');
       var voidParentMessage = $('#groupCreateVoidParentGroupMessage');
