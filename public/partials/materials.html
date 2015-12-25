@@ -30,9 +30,10 @@
             </tr>
             </thead>
             <tbody>
+
             <tr ng-click="clickOnGroup(mg._id)" ng-class="mg._id == groupId ? 'active' : ''"
                 class="simple_with_animation divider" data-toggle="collapse" data-target="#demo"
-                ng-repeat="mg in materialGroups | filter: {parent: null}">
+                ng-repeat="mg in materialGroups">
 
                 <td style="width: 1px;">
                     <a type="button" class="btn btn-xs btn-danger" role="button" ng-click="deleteMaterialGroup(mg)">
@@ -67,8 +68,13 @@
                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                     </a>
                     <a type="button" class="btn btn-danger btn-xs" ng-click="deleteMaterial(material)">
+                        <span class="glyphicon glyphicon-retweet" aria-hidden="true"></span>
+                    </a>
+                    <a
+                     type="button" class="btn btn-danger btn-xs" ">
                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                     </a>
+
                 </td>
                 <td>
                     {{material.name}}
