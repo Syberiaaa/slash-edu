@@ -9,6 +9,7 @@ router.put('/', function(req, res) {
     parent: req.body.parent,
     owner: req.user._id
   });
+
   newMatGrps.save(function(err) {
     if (err) {
       res.sendStatus(400);
