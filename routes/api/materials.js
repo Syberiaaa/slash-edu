@@ -27,15 +27,14 @@ router.put('/', function(req, res) {
   var newMat = new Materials(createMaterialObject(req.body));
   newMat.parent = groupId;
 
-  /*if (groupId==undefined)
-    newMat.parent =
+
   newMat.save(function(err) {
     if (err) {
       res.sendStatus(400);
     } else {
       res.sendStatus(200);
     }
-  });*/
+  });
 });
 
 router.get('/', function(req, res) {

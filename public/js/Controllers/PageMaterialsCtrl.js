@@ -53,8 +53,8 @@ PagesControllers.controller('MaterialsCtrl', ['$scope', '$http',
     function updateMaterialGroups() {
       $http.get('/api/materialGroups')
         .then(function(response) {
-          $scope.materialGroups.unshift({_id: undefined, name: 'root'})
           $scope.materialGroups = response.data;
+          $scope.materialGroups.unshift({_id: undefined, name: 'root',parent:null})
         });
     }
 
