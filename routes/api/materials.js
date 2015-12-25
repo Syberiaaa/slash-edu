@@ -13,14 +13,23 @@ router.post('/preview', function(req, res) {
 });
 
 function createMaterialObject(reqBody) {
-  return {
-    name: reqBody.name,
-    type: reqBody.type,
-    data: {
-      src: reqBody.src,
-      html: kramed(reqBody.src)
-    }
-  };
+  var res = {};
+  if (reqBody.name) res.name = reqBody.name;
+  if (reqBody.type) res.type = reqBody.type;
+  if (reqBody.data) {
+    res.data.src = reqBody.src;
+    res.data.html = kramed(reqBody.src);
+  }
+  if (reqBody.parent) res.parent=reqBody.parent;
+  return res;
+  //return {
+  //  name: reqBody.name,
+  //  type: reqBody.type,
+  //  data: {
+  //    src: reqBody.src,
+  //    html: kramed(reqBody.src)
+  //  }
+  //};
 }
 
 router.put('/', function(req, res) {

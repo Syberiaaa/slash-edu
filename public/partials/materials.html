@@ -67,7 +67,7 @@
                     <a type="button" class="btn btn-xs btn-warning" role="button" ng-href="#/materials/{{material._id}}">
                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                     </a>
-                    <a type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target=".bs-example-modal-lg">
+                    <a type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target=".bs-example-modal-lg" ng-click="changeId(material._id)">
                         <span class="glyphicon glyphicon-retweet" aria-hidden="true"></span>
                     </a>
                     <a type="button" class="btn btn-danger btn-xs" ng-click="deleteMaterial(material)" >
