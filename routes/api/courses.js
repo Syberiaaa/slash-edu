@@ -13,7 +13,16 @@ router.get('/', function(req, res) {
   });
 });
 
-router.get('/:courseId', function(req, res) { });
+router.get('/:courseId', function(req, res) {
+  Courses.findById(req.params.courseId, function(err, course) {
+    if(course) {
+      //console.log(course);
+      res.send(course);
+    } else {
+      res.send({});
+    }
+  });
+});
 
 router.delete('/:courseId', function(req, res) { });
 

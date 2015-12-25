@@ -50,17 +50,16 @@ router.get('/', function(req, res) {
 
 router.get('/:materialId', function(req, res) {
   Materials.findById(req.params.materialId, function(err, material) {
-    material.save(function(err) {
-      if (err) {
-        return andleError(err);
-      }
 
-      res.send({
-        data: material.data,
-        name: material.name,
-        type: material.type
-      });
-    });
+   if(material) {
+     res.send({
+       data: material.data,
+       name: material.name,
+       type: material.type
+     });
+   } else {
+     res.send({});
+   }
   });
 });
 
