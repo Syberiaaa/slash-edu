@@ -14,13 +14,13 @@ module.exports = function(mongoose) {
         owner: null
       });
 
-    newRoot.save(function(err) {
+    /*newRoot.save(function(err) {
       if (err) {
         res.sendStatus(400);
       } else {
         res.sendStatus(200);
       }
-    });
+    });*/
   });
   };
 
