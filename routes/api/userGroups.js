@@ -74,8 +74,15 @@ router.post ('/:groupId', function(req, res) {
 });
 
 router.delete('/:groupId', function(req, res) {
-  req.UserGroups.remove(UserGroups);
-  res.send('not implemented yet');
+
+  UserGroups.findByIdAndRemove(req.params.groupId, function(err) {
+if (err) {
+  res.sendStatus(400);
+} else {
+  res.sendStatus(200);
+}
 });
+});
+
 
 module.exports = router;
