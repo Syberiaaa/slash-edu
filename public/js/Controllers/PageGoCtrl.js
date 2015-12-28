@@ -1,5 +1,5 @@
-PagesControllers.controller('GoCtrl', ['$scope', '$http',
-  function($scope, $http) {
+PagesControllers.controller('GoCtrl', ['$scope', '$http', '$location',
+  function($scope, $http, $location) {
     $scope.userCourses = [];
 
     $http.get('/api/userCourses')

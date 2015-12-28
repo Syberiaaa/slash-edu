@@ -32,14 +32,25 @@ router.get('/:courseId', function(req, res) {
 router.delete('/:courseId', function(req, res) {
   Courses.findByIdAndRemove(req.params.courseId, function(err) {
     if (err) {
-      res.sendStatus(400);
+      console.error(err);
     } else {
-      res.sendStatus(200);
+      res.send(courses);
     }
   });
 });
 
+router.get('/:courseId', function(req, res) {
+  Courses.findById(req.params.courseId, function(err, course) {
+    if(course) {
+      //console.log(course);
+      res.send(course);
+    } else {
+      res.send({});
+    }
+  });
+});
 
+router.delete('/:courseId', function(req, res) { });
 
 router.post('/:courseId', function(req, res) { });
 

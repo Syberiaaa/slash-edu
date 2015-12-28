@@ -5,22 +5,18 @@
 
 <h1>User Courses</h1>
 
-<table class="table table-striped">
-    <thed>
-        <tr>
-            <!--  <th>#</th>-->
-            <th>User</th>
-            <th>Course</th>
-        </tr>
-    </thed>
-    <tbody>
-    <tr ng-repeat="course in userCourses">
-        <!--<td>{{course._id}}</td>-->
-        <td>{{course.user.name}}</td>
-        <td>{{course.course.name}}</td>
+<div class="row margin-top-20">
+    <div class="col-md-12">
+<table class='table table-striped table-bordered sorted_table'>
+
+    <tr ng-repeat="course in userCourses" >
+        <td><a ng-href="#/go/{{course.course._id}}">{{course.course.name}}</a></td>
     </tr>
-    </tbody>
+
 </table>
+</div>
+    </div>
+
 <div>
     <ul class="pagination">
         <li><a ng-click="decCurrentPage()">&laquo;</a></li>
