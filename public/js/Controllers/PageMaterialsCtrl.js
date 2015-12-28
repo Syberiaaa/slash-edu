@@ -8,7 +8,7 @@ PagesControllers.controller('MaterialsCtrl', ['$scope', '$http',
     $scope.materialGroups = [];
     $scope.name = '';
     $scope.materialId;
-
+    $scope.modalGroupId;
 
     $scope.setCurrentPage = function(val) {
       $scope.currentPage = val;
@@ -80,15 +80,15 @@ PagesControllers.controller('MaterialsCtrl', ['$scope', '$http',
     };
 
 
-    $scope.clickOnModalGroup = function(groupId) {
-      console.log("Modal window "+ groupId)
+    $scope.clickOnModalGroup = function(modalGroupId) {
+
       console.log("MaterialId "+$scope.materialId)
       $http.post('/api/materials/'+$scope.materialId, {
-          parent:groupId
+          parent:modalGroupId
       }).then(function(err){
 
       });
-
+      $scope.modalGroupId = modalGroupId;
     };
 
     $scope.changeId = function(materialId){
