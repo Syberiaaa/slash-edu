@@ -14,9 +14,10 @@ router.post('/preview', function(req, res) {
 
 function createMaterialObject(reqBody) {
   var res = {};
+  res.data = {};
   if (reqBody.name) res.name = reqBody.name;
   if (reqBody.type) res.type = reqBody.type;
-  if (reqBody.data) {
+  if (reqBody.src) {
     res.data.src = reqBody.src;
     res.data.html = kramed(reqBody.src);
   }
@@ -69,6 +70,7 @@ router.get('/:materialId', function(req, res) {
 });
 
 router.post('/:materialId', function(req, res) {
+  console.log(res);
   Materials.findByIdAndUpdate(
     req.params.materialId,
     {$set: createMaterialObject(req.body)},
