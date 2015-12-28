@@ -6,6 +6,7 @@ var Materials = db.model('Materials');
 
 var ObjectId = db.Types.ObjectId;
 var groupId;
+var modalGroupId;
 var materailId;
 
 router.post('/preview', function(req, res) {
