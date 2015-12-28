@@ -7,7 +7,7 @@ PagesControllers.controller('MaterialsCtrl', ['$scope', '$http',
     $scope.numberMaterial = 0;
     $scope.materialGroups = [];
     $scope.name = '';
-
+    $scope.materialId=0;
 
 
     $scope.setCurrentPage = function(val) {
@@ -54,7 +54,7 @@ PagesControllers.controller('MaterialsCtrl', ['$scope', '$http',
       $http.get('/api/materialGroups')
         .then(function(response) {
           $scope.materialGroups = response.data;
-          $scope.materialGroups.unshift({_id: undefined, name: 'root',parent:null})
+          $scope.materialGroups.unshift({_id: null, name: 'root',parent:null})
         });
     }
 
@@ -71,18 +71,27 @@ PagesControllers.controller('MaterialsCtrl', ['$scope', '$http',
 
 
     $scope.clickOnGroup = function(groupId) {
-     if (groupId){
       $http.get('/api/materials?materialGroupID=' + groupId)
         .then(function(response) {
           $scope.materials = response.data;
         });
       console.log('clickOnGroup ' + groupId);
       $scope.groupId = groupId;
-    }else $http.get('/api/materials').then(function(response) {
-       $scope.materials = response.data;
-     })
+    };
+
+
+    $scope.clickOnModalGroup = function(groupId) {
+      console.log("Modal window "+ groupId)
+      console.log("MaterialId "+$scope.materialId)
+      $http.post('/api/materials/'+groupId, {
+
+      });
 
     };
+
+    $scope.changeId = function(materialId){
+      $scope.materialId=materialId;
+    }
 
     $scope.newMaterial = function() {
       $http.put('/api/materials/groupId', {

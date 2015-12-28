@@ -13,20 +13,29 @@ router.post('/preview', function(req, res) {
 });
 
 function createMaterialObject(reqBody) {
-  return {
-    name: reqBody.name,
-    type: reqBody.type,
-    data: {
-      src: reqBody.src,
-      html: kramed(reqBody.src)
-    }
-  };
+  var res = {};
+  if (reqBody.name) res.name = reqBody.name;
+  if (reqBody.type) res.type = reqBody.type;
+  if (reqBody.data) {
+    res.data.src = reqBody.src;
+    res.data.html = kramed(reqBody.src);
+  }
+  if (reqBody.parent) res.parent=reqBody.parent;
+  return res;
+  //return {
+  //  name: reqBody.name,
+  //  type: reqBody.type,
+  //  data: {
+  //    src: reqBody.src,
+  //    html: kramed(reqBody.src)
+  //  }
+  //};
 }
 
 router.put('/', function(req, res) {
   var newMat = new Materials(createMaterialObject(req.body));
   newMat.parent = groupId;
-
+  console.log("GroupId = "+groupId)
 
   newMat.save(function(err) {
     if (err) {
@@ -40,12 +49,17 @@ router.put('/', function(req, res) {
 router.get('/', function(req, res) {
   var query = {};
   if (req.query.materialGroupID) {
+    if (req.query.materialGroupID=='null'){
+      query.parent=null
+    }
+    else
     query.parent = new ObjectId(req.query.materialGroupID);
   }
 
   Materials.find(query, function(err, materials) {
     res.send(materials);
   });
+
 });
 
 router.get('/:materialId', function(req, res) {
