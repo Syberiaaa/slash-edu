@@ -106,9 +106,9 @@
                    </thead>
                    <tbody>
 
-                   <tr ng-click="clickOnModalGroup(mg._id)" ng-class="mg._id == groupId ? 'active' : ''"
+                   <tr ng-repeat="mg in materialGroups" ng-click="clickOnModalGroup(mg._id)" ng-class="mg._id == groupId ? 'active' : ''"
                        class="simple_with_animation divider" data-toggle="collapse" data-target="#demo"
-                       ng-repeat="mg in materialGroups">
+                       >
 
                        <td>{{mg.name}}</td>
                    </tr>
