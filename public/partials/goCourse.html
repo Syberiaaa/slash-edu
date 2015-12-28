@@ -17,8 +17,8 @@
 
 
             <tr ng-repeat="material in materialCourse" >
-                <td ng-click="clickmaterial(course.material._id)"><a>{{material.name}}</a></td>
-            <td ng-click="clickmaterial(course.material._id)"><a>{{material.type}}</a></td>
+                <td><a ng-href="#/go/{{courseId}}/{{material._id}}">{{material.name}}</a></td>
+                <td>{{material.type}}</td>
             </tr>
     </div>
 </div>
